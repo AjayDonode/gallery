@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-header>
+        <ion-toolbar>
+          <ion-title>Some title</ion-title>
+          <ion-buttons slot="start">
+            <ion-button (click)="homepage()">
+              <ion-icon name="home"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+</ion-header>
+
+<ion-content>
+<ion-item>
+  <ion-label>Select Images to upload</ion-label> 
+  <input
+          id="uploadBtn"
+          type="file"
+          class="upload"
+          (change)="onSelectFile($event.target.files)"
+        />
+  <ion-buttons slot="end">
+      <ion-button (click)="addImages($event.target.files)">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+</ion-item>
+<!-- <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="item.src"></ion-img>
+      </ion-thumbnail>
+      <ion-label>{{item.text}}</ion-label>
+    </ion-item>
+  </ion-list> -->
+  <ion-label>here </ion-label>
+  <ion-thumbnail slot="start">
+      <ion-img [src]="imgURL" *ngIf="imgURL"></ion-img>
+    </ion-thumbnail>
+</ion-content>

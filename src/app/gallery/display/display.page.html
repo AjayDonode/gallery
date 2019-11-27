@@ -1,0 +1,43 @@
+<ion-header translucent color="primary">
+  <ion-toolbar color="primary" slot="center">
+    <ion-title>
+      {{ gallery.title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+  <ion-slides>
+    <ion-slide *ngFor="let data of gallery.gallery" id="{{ data.id }}">
+      <ion-card>
+        <ion-card-header> {{ data.id }}: {{ data.header }}</ion-card-header>
+        <ion-card-content>
+          <ion-row slot="center">
+            <img
+              [src]="data.picture"
+              (load)="data.loaded = true"
+              [hidden]="!data.loaded"
+            />
+            <img src="{{ data.href }}" [hidden]="data.loaded" />
+          </ion-row>
+          <ion-row class="button-bar">
+            <ion-col align-self-start>
+              <ion-icon name="thumbs-up"></ion-icon>12
+            </ion-col>
+            <ion-col>
+              <ion-icon name="text"></ion-icon>4
+            </ion-col>
+            <ion-col> <ion-icon name="share-alt"></ion-icon> Share </ion-col>
+          </ion-row>
+          <p slot="start">
+            <span style="text-align:left">{{ data.description }}</span>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <!-- <ion-footer height=10px>
+    <ion-toolbar>
+      <ion-title>Footer</ion-title>
+    </ion-toolbar>
+  </ion-footer> -->
+</ion-content>
