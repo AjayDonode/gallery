@@ -77,7 +77,7 @@ export class AddgalleryPage implements OnInit {
             name: file.name,
             sequence: 0,
             filepath: resp,
-            description: "this.fileSize Test"
+            description: "this.fileSizeTest"
           });
           this.isUploading = false;
           this.isUploaded = true;
