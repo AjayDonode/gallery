@@ -15,11 +15,10 @@ import { DatabaseService } from './services/database.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
- 
 import { environment } from '../environments/environment';
-
+import { FileSizeFormatPipe } from './components/file-size-format.pipe';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,FileSizeFormatPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
            AngularFireModule.initializeApp(environment.firebase, 'my-app-name'), // imports firebase/app needed for everything
