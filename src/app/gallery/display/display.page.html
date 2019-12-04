@@ -1,26 +1,27 @@
 <ion-header translucent color="primary">
   <ion-toolbar color="primary" slot="center">
     <ion-title>
-      {{ gallery.title }}
+      TEST Title TBD
+      <!-- {{ gallery.name }} -->
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen class="ion-padding" scroll-y="false">
   <ion-slides>
-    <ion-slide *ngFor="let data of gallery.gallery" id="{{ data.id }}">
+    <ion-slide *ngFor="let data of gallery" id="{{ data.id }}">
       <ion-card>
-        <ion-card-header> {{ data.id }}: {{ data.header }}</ion-card-header>
+        <ion-card-header>  {{ data.name }}</ion-card-header>
         <ion-card-content>
           <ion-row slot="center">
             <img
-              [src]="data.picture"
-              (load)="data.loaded = true"
-              [hidden]="!data.loaded"
+              [src]="data.filepath"
+              (load)="loaded = true"
+              [hidden]="!loaded"
             />
-            <img src="{{ data.href }}" [hidden]="data.loaded" />
+            <img src="{{data.filepath}}" [hidden]="loaded" />
           </ion-row>
           <ion-row class="button-bar">
-            <ion-col align-self-start>
+            <ion-col class="ion-align-self-start">
               <ion-icon name="thumbs-up"></ion-icon>12
             </ion-col>
             <ion-col>

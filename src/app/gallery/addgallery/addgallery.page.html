@@ -17,16 +17,25 @@
     <input id="uploadBtn" type="file" class="upload" (change)="addImages($event.target.files)" />
   </ion-item>
   <ion-list>
-    <img/>
-    <div *ngIf="percentage | async as pct">
-      Progress: {{ pct | number }}%
-      <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
-    </div>
-    <div *ngIf="snapshot | async as snap">
-      File Size: {{snap.totalBytes}} Transfered:
-      {{ snap.bytesTransferred}}
-      <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes">
-      </div>
-    </div>
+    <ion-card>
+        <div *ngIf="percentage | async as pct">
+            <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+          </div>
+          <div *ngIf="snapshot | async as snap">
+            <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes">
+            </div>
+          </div>
+      <img/>
+    </ion-card>
+    
   </ion-list>
 </ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add" (click)="presentModal()" ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+<ion-footer>
+   
+    
+  </ion-footer>

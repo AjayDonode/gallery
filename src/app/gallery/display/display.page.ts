@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { DatabaseService } from 'src/app/services/database.service';
+import { MyData } from '../addgallery/MyData';
 
 @Component({
   selector: 'app-display',
@@ -6,46 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./display.page.scss'],
 })
 export class DisplayPage implements OnInit {
-
-  gallery: any = {
-    id: 'article_id',
-    title: 'Ganesh Temples',
-    description: 'RTCSessionDescription',
-    gallery: [
-      {
-        id: 1,
-        header: 'Lalbagcha Raja',
-        href: 'https://picsum.photos/500/700',
-        path: 'uploads',
-        description: 'Test blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , '+
-        'lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsom END'
-      }, {
-        id: 2,
-        header: 'option1',
-        href: 'https://picsum.photos/500/700',
-        path: 'uploads',
-        description: 'blah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah ,'+
-        ' lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsom END'
-      }, {
-        id: 3,
-        header: 'option3',
-        href: 'https://picsum.photos/500/700',
-        path: 'uploads',
-        description: 'blah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah ,'+
-        '  lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsom END'
-      }, {
-        id: 4,
-        header: 'option4',
-        href: 'https://picsum.photos/500/700',
-        path: 'uploads',
-        description: 'blah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , '+
-        ' lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsomblah blah , lorem ipsom END'
-      }
-    ]
-  };
-
-  constructor() { }
-
+  gallery: MyData[] = [];
+  loaded = false;
+  constructor(private storage: AngularFireStorage, private imageDBService: DatabaseService) {
+    // this.imageDBService = imageDBService;
+  }
   ngOnInit() {
+    
+     this.imageDBService.getImages().subscribe(res => {
+      this.gallery = res;
+    });
   }
 }

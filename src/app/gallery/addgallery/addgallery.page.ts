@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { MyData } from './MyData';
+import { ImageService } from 'src/app/services/image.service';
+import { DatabaseService } from 'src/app/services/database.service';
+import { ModalController } from '@ionic/angular';
+import { AddModalPage } from './modal/AddModalPage';
+
 @Component({
   selector: 'app-addgallery',
   templateUrl: './addgallery.page.html',
@@ -11,9 +15,9 @@ import { MyData } from './MyData';
 })
 export class AddgalleryPage implements OnInit {
 
-  constructor(private storage: AngularFireStorage, private database: AngularFirestore) {
-    this.imageCollection = database.collection<MyData>('freakyImages');
-    this.images = this.imageCollection.valueChanges();
+  constructor(private storage: AngularFireStorage, private imageDBService: DatabaseService, public modalController: ModalController) {
+    // this.imageCollection = database.collection<MyData>('Images');
+    // this.images = this.imageCollection.valueChanges();
   }
   // Upload Task 
   task: AngularFireUploadTask;
@@ -29,7 +33,7 @@ export class AddgalleryPage implements OnInit {
 
   // Uploaded Image List
   images: Observable<MyData[]>;
-  private imageCollection: AngularFirestoreCollection<MyData>;
+  // private imageCollection: AngularFirestoreCollection<MyData>;
   isUploading: boolean;
   isUploaded: boolean;
   fileName: string;
@@ -73,7 +77,7 @@ export class AddgalleryPage implements OnInit {
         this.UploadedFileURL = fileRef.getDownloadURL();
         this.UploadedFileURL.subscribe(resp => {
           document.querySelector('img').src = resp;
-          this.addImagetoDB({
+          this.imageDBService.addImage({
             name: file.name,
             sequence: 0,
             filepath: resp,
@@ -91,23 +95,17 @@ export class AddgalleryPage implements OnInit {
     )
   }
 
-
-  addImagetoDB(image: MyData) {
-    // Create an ID for document
-    const id = this.database.createId();
-    // Set document id with value in database
-    this.imageCollection.doc(id).set(image).then(resp => {
-      console.log(resp);
-    }).catch(error => {
-      console.log('error while storing to DB' + error);
-    });
-  }
-
   ngOnInit() {
   }
 
   homepage(){
     //Blank function
   }
- 
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AddModalPage
+    });
+    return await modal.present();
+  }
 }
