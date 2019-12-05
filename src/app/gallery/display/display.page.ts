@@ -16,7 +16,6 @@ export class DisplayPage implements OnInit {
     // this.imageDBService = imageDBService;
   }
   ngOnInit() {
-    
      this.imageDBService.getImages().subscribe(res => {
       this.gallery = res;
     });

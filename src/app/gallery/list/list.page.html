@@ -1,0 +1,22 @@
+<ion-header translucent color="primary">
+  <ion-toolbar color="primary" slot="center">
+    <ion-title>list</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let gallery of gallerylist" >
+      <ion-label>
+          <h2>{{gallery.name}}</h2>
+          <p>{{gallery.description}}</p>
+        </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add" (click)="createNewGallery()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+</ion-content>
