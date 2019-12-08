@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
 import { GalleryService } from 'src/app/services/gallery.service';
-import { ModalController } from '@ionic/angular';
-import { CreateGalleryModalPage } from './create-gallery-modal.page';
+import { ModalController, IonItem } from '@ionic/angular';
+import { CreateGalleryModalPage } from './create-gallery-modal/create-gallery-modal.page';
+import { Gallery } from '../addgallery/Gallery';
 
 
 @Component({
@@ -17,18 +18,44 @@ export class ListPage implements OnInit {
 
   ngOnInit() {
     this.galleryService.getGalleryList().subscribe(res => {
-     this.gallerylist = res;
-   });
- }
+      this.gallerylist = res;
+    });
+  }
 
- async createNewGallery() {
-   console.log("Create Gallery");
-   const modal = await this.modalController.create({
-    component: CreateGalleryModalPage
-  });
-  return await modal.present();
-}
- 
+  async createNewGallery() {
+    const modal = await this.modalController.create({
+      component: CreateGalleryModalPage
+    });
+    return await modal.present();
+  }
 
+  deleteItem(item: Gallery) {
+    this.galleryService.delete(item);
+  }
+
+
+  editItem(gallery: Gallery) {
+    this.openModal(gallery);
+  }
+
+  async openModal(gallery) {
+    const modal = await this.modalController.create({
+      component: CreateGalleryModalPage,
+      componentProps: {
+        gallery
+      }
+    });
+
+
+    modal.onDidDismiss().then((dataReturned) => {
+      // if (dataReturned.data.id == null) {
+      //   this.expenseService.saveExpense(dataReturned.data);
+      // } else {
+      //   this.expenseService.updateExpense(dataReturned.data);
+      // }
+      // this.calculateTotalExpense();
+    });
+    return await modal.present();
+  }
 
 }

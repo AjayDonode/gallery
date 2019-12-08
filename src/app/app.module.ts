@@ -13,7 +13,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 import { FileSizeFormatPipe } from './components/file-size-format.pipe';
-import { CreateGalleryPageModule } from './gallery/list/create-gallery-modal.module';
+import { CreateGalleryPageModule } from './gallery/list/create-gallery-modal/create-gallery-modal.module';
 @NgModule({
   declarations: [AppComponent,FileSizeFormatPipe],
   entryComponents: [],

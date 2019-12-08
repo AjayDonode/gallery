@@ -1,11 +1,11 @@
-import { MyData } from './MyData';
-
+import { ImageData } from './ImageData';
 export interface Gallery {
+    id?: string;
     name: string;
-    images: MyData[];
+    images: ImageData[];
     description: string;
     createdby: string;
-    createdon: Date;
-    upadtedby: string;
-    updatedon: Date;
-  }
+    createdon?: string;
+    upadtedby?: string;
+    updatedon?: string;
+}

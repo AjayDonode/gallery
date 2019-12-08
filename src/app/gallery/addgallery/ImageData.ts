@@ -1,4 +1,4 @@
-export interface MyData {
+export interface ImageData {
   name: string;
   sequence: number;
   description: string;

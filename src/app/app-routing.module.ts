@@ -11,7 +11,7 @@ const routes: Routes = [
       import('./gallery/display/display.module').then(m => m.DisplayPageModule)
   },
   {
-    path: 'addgallery',
+    path: 'addgallery/:id',
     loadChildren: () =>
       import('./gallery/addgallery/addgallery.module').then(m => m.AddgalleryPageModule)
   },
@@ -32,5 +32,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-
-

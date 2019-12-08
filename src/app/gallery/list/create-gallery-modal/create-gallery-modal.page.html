@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-title>{{modalTitle}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input [(ngModel)]="gallery.name"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Tags</ion-label>
+        <ion-input [(ngModel)]="gallery.tag"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input [(ngModel)]="gallery.description" ></ion-input>
+      </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-button (click)="closeModal()" color="warning"
+        >Cancel</ion-button
+      >
+      <ion-button (click)="saveGallery()">Save</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

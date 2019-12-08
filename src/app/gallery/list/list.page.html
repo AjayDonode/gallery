@@ -1,16 +1,22 @@
 <ion-header translucent color="primary">
   <ion-toolbar color="primary" slot="center">
-    <ion-title>list</ion-title>
+    <ion-title>Gallery</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-searchbar></ion-searchbar>
   <ion-list>
-    <ion-item *ngFor="let gallery of gallerylist" >
+      <ion-item *ngFor="let gallery of gallerylist" >
       <ion-label>
           <h2>{{gallery.name}}</h2>
           <p>{{gallery.description}}</p>
-        </ion-label>
+        </ion-label> 
+        <ion-icon name="remove-circle-outline" (click)="deleteItem(gallery)"></ion-icon>
+        <ion-icon name="create" (click)="editItem(gallery)"></ion-icon>
+        <!-- <button ion-button clear (click)="deleteTask(i)">
+            <ion-icon name="trash"></ion-icon>
+          </button> -->
     </ion-item>
   </ion-list>
 

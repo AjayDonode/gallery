@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GalleryService {
-
   private gallerylist: Observable<Gallery[]>;
   private galleryCollection: AngularFirestoreCollection<Gallery>;
 
@@ -19,6 +18,7 @@ export class GalleryService {
       return actions.map(a => {
         const data = a.payload.doc.data();
         const id = a.payload.doc.id;
+        data.id = id;
         return { id, ...data };
       });
     })
@@ -29,14 +29,25 @@ export class GalleryService {
     return this.gallerylist;
   }
 
-  addGallery(gallery: Gallery) {
+  addGallery(gallery: Gallery): Gallery {
     // Create an ID for document
     const id = this.database.createId();
+    gallery.id = id;
     // Set document id with value in database
     this.galleryCollection.doc(id).set(gallery).then(resp => {
       console.log(resp);
     }).catch(error => {
       console.log('error while storing to DB' + error);
     });
+    return gallery;
   }
+
+  delete(gallery: Gallery) {
+    return this.galleryCollection.doc(gallery.id).delete();
+  }
+
+  update(gallery: Gallery) {
+    return this.galleryCollection.doc(gallery.id).update(gallery);
+  }
+
 }
