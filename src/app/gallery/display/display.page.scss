@@ -1,4 +1,4 @@
-ion-card {
+gallery-card {
     margin-left: 0px;
     margin-right: 0px;
     max-height: 100%;
@@ -6,23 +6,29 @@ ion-card {
   flex-direction: column;
     }
 
-    .header {
-        height: 20px;
-        padding: 10px;
-        color:red;
-        font-size: 4rem !important; // Default should be 2.0rem
-      }
+    .gallery-card img {
+      //max-height: 35vh;
+      overflow: hidden;
+    }
+ 
+    
+    // .header {
+    //     height: 20px;
+    //     padding: 10px;
+    //     color:red;
+    //     font-size: 4rem !important; // Default should be 2.0rem
+    //   }
       
-      .sub-header {
-        height: 40px;
-      }
+    //   .sub-header {
+    //     height: 40px;
+    //   }
 
-      ion-card-header {
-        height: 30px;
-        padding: 10px;
-        background-color: rgba(18, 22, 27, 0.404);
-        font-weight: 200; 
-        }
+    //   ion-card-header {
+    //     height: 30px;
+    //     padding: 10px;
+    //     background-color: rgba(18, 22, 27, 0.404);
+    //     font-weight: 200; 
+    //     }
 
         .button-bar {
             height: 40px;

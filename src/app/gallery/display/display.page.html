@@ -1,36 +1,36 @@
 <ion-header translucent color="primary">
-  <ion-toolbar color="primary" slot="center">
+  <ion-toolbar color="primary">
     <ion-title>
-      TEST Title TBD
-      <!-- {{ gallery.name }} -->
+      {{ gallery.name }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen class="ion-padding" scroll-y="false">
+<ion-content class="gallery-card" fullscreen>
   <ion-slides>
-    <ion-slide *ngFor="let data of gallery" id="{{ data.id }}">
-      <ion-card>
-        <ion-card-header> {{ data.name }}</ion-card-header>
-        <ion-card-content>
-          <ion-row slot="center">
-            <img
-              [src]="data.filepath"
-              (load)="loaded = true"
-              [hidden]="!loaded"
-            />
-            <img src="{{data.filepath}}" [hidden]="loaded" />
-          </ion-row>
-          <ion-row class="button-bar">
+    <ion-slide *ngFor="let data of gallery.images" id="{{ data.name }}">
+      <ion-card >
+        <!-- <ion-card-content> -->
+          <img
+            [src]="data.filepath"
+            (load)="loaded = true"
+            [hidden]="!loaded"
+          />
+          <img src="{{data.filepath}}" [hidden]="loaded" />
+          <ion-card-header>
+            <ion-card-title >{{ data.name }}</ion-card-title>
+            <ion-card-subtitle>{{ data.description }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+          </ion-card-content>
+          <!-- <ion-row class="button-bar">
             <ion-col class="ion-align-self-start">
               <ion-icon name="thumbs-up"></ion-icon>12
             </ion-col>
             <ion-col> <ion-icon name="text"></ion-icon>4 </ion-col>
             <ion-col> <ion-icon name="share-alt"></ion-icon> Share </ion-col>
-          </ion-row>
-          <p slot="start">
-            <span style="text-align:left">{{ data.description }}</span>
-          </p>
-        </ion-card-content>
+          </ion-row> -->
+        <!-- </ion-card-content> -->
       </ion-card>
     </ion-slide>
   </ion-slides>

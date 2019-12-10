@@ -6,7 +6,7 @@ import { ImageData } from './ImageData';
 import { ImageService } from 'src/app/services/image.service';
 import { DatabaseService } from 'src/app/services/database.service';
 import { ModalController } from '@ionic/angular';
-import { AddModalPage } from './modal/AddModalPage';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { Gallery } from './Gallery';
 import { GalleryService } from 'src/app/services/gallery.service';
@@ -23,6 +23,11 @@ export class AddgalleryPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.gallery = this.router.getCurrentNavigation().extras.state.gallery;
+        if (this.gallery.images != null && this.gallery.images.length > 0) {
+          this.currentImage = this.gallery.images[0];
+        } else {
+          this.generateBlankGallery(this.gallery);
+        }
         console.log("Printing Gallery Object" + this.gallery.id);
       }
     });
@@ -38,7 +43,12 @@ export class AddgalleryPage implements OnInit {
 
   // Uploaded File URL
   UploadedFileURL: Observable<string>;
-
+  currentImage: ImageData = {
+    name: "",
+    sequence: 0,
+    description: "",
+    filepath: "",
+  };
   // Uploaded Image List
   images: Observable<ImageData[]>;
   // private imageCollection: AngularFirestoreCollection<MyData>;
@@ -46,7 +56,7 @@ export class AddgalleryPage implements OnInit {
   isUploaded: boolean;
   fileName: string;
   fileSize: number;
-
+  sequence: number;
   imagePath: any;
   imgURL: any;
   public message: string;
@@ -55,6 +65,19 @@ export class AddgalleryPage implements OnInit {
   ////
   imageResponse: any;
   options: any;
+
+  generateBlankGallery(gallery: Gallery) {
+    gallery.images = [];
+    for (let i = 0; i <= 10; i++) {
+      const image: ImageData = {
+        name: "",
+        sequence: i,
+        description: "",
+        filepath: "",
+      };
+      gallery.images.push(image);
+    }
+  }
 
   addImages(event: FileList) {
     // The File object
@@ -78,7 +101,7 @@ export class AddgalleryPage implements OnInit {
     this.task = this.storage.upload(path, file, { customMetadata });
     // Get file progress percentage
 
-    
+
     this.UploadedFileURL = fileRef.getDownloadURL();
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
@@ -87,15 +110,20 @@ export class AddgalleryPage implements OnInit {
         this.UploadedFileURL = fileRef.getDownloadURL();
         this.UploadedFileURL.subscribe(resp => {
           document.querySelector('img').src = resp;
-          
-          this.gallery.images = [];
-          let image : ImageData = {
+
+          if (this.gallery.images == null) {
+            this.gallery.images = [];
+            this.sequence = 0;
+          }
+          this.sequence++;
+
+          let image: ImageData = {
             name: file.name,
-            sequence: 0,
+            sequence: this.sequence,
             filepath: resp,
             description: "this.fileSizeTest"
           };
-        
+
           this.gallery.images.push(image);
           this.imageService.update(this.gallery);
           this.isUploading = false;
@@ -118,9 +146,5 @@ export class AddgalleryPage implements OnInit {
   }
 
   async presentModal() {
-    const modal = await this.modalController.create({
-      component: AddModalPage
-    });
-    return await modal.present();
   }
 }

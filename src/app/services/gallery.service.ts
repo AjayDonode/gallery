@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GalleryService {
+
   private gallerylist: Observable<Gallery[]>;
   private galleryCollection: AngularFirestoreCollection<Gallery>;
 
@@ -50,4 +51,7 @@ export class GalleryService {
     return this.galleryCollection.doc(gallery.id).update(gallery);
   }
 
+  getImagesForGallery(galleryId: string) {
+     return this.galleryCollection.doc<Gallery>(galleryId).valueChanges();
+  }
 }

@@ -12,10 +12,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-import { FileSizeFormatPipe } from './components/file-size-format.pipe';
+// import { FileSizeFormatPipe } from './components/file-size-format.pipe';
 import { CreateGalleryPageModule } from './gallery/list/create-gallery-modal/create-gallery-modal.module';
 @NgModule({
-  declarations: [AppComponent,FileSizeFormatPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CreateGalleryPageModule,
            AngularFireModule.initializeApp(environment.firebase, 'my-app-name'), // imports firebase/app needed for everything

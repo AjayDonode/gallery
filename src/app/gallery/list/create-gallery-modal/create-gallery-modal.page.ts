@@ -18,6 +18,7 @@ export class CreateGalleryModalPage implements OnInit {
       name: '',
       description: '',
       images: [],
+      tags: [],
       createdby: null,
       upadtedby: null
     };

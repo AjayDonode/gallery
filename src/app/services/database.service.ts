@@ -26,7 +26,6 @@ export class DatabaseService {
 
   }
 
-
   getImages() {
     return this.images;
   }

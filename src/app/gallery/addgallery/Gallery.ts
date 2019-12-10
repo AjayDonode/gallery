@@ -3,6 +3,7 @@ export interface Gallery {
     id?: string;
     name: string;
     images: ImageData[];
+    tags: string[];
     description: string;
     createdby: string;
     createdon?: string;

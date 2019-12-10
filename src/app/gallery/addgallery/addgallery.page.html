@@ -12,30 +12,44 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>Select Images to upload</ion-label>
-    <input id="uploadBtn" type="file" class="upload" (change)="addImages($event.target.files)" />
-  </ion-item>
-  <ion-list>
-    <ion-card>
-        <div *ngIf="percentage | async as pct">
-            <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
-          </div>
-          <div *ngIf="snapshot | async as snap">
-            <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes">
-            </div>
-          </div>
-      <img/>
-    </ion-card>
-    
-  </ion-list>
+  <ion-card *ngFor="let image of gallery.images" id="{{ image.name }}">
+      <ion-item>
+          <ion-label position="floating">Sequence</ion-label>
+          <ion-input  [(ngModel)]="image.sequence"></ion-input>
+        </ion-item>
+        <ion-item>
+            <img src="{{image.filepath}}"/>
+        </ion-item>
+    <ion-item>
+  
+      <ion-label>Select Image</ion-label>
+      <input
+        id="uploadBtn"
+        type="file"
+        class="upload"
+        (change)="addImages($event.target.files)"
+      />
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Title</ion-label>
+      <ion-input  [(ngModel)]="image.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea [(ngModel)]="image.description"></ion-textarea>
+    </ion-item>
+    <div *ngIf="percentage | async as pct">
+      <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+    </div>
+    <div *ngIf="snapshot | async as snap">
+      <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
+    </div>
+    <img />
+  </ion-card>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add" (click)="presentModal()" ></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-<ion-footer>
-   
-    
-  </ion-footer>
+  <ion-fab-button>
+    <ion-icon name="add" (click)="presentModal()"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-footer> </ion-footer>

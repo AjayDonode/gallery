@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="ion-text-center">
-    <ion-title>{{modalTitle}}</ion-title>
+    <ion-title>Add Gallery</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,12 +12,12 @@
       
       <ion-item>
         <ion-label position="floating">Tags</ion-label>
-        <ion-input [(ngModel)]="gallery.tag"></ion-input>
+        <ion-input [(ngModel)]="gallery.tags"></ion-input>
       </ion-item>
       
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-input [(ngModel)]="gallery.description" ></ion-input>
+        <ion-textarea [(ngModel)]="gallery.description" ></ion-textarea>
       </ion-item>
 
 </ion-content>
