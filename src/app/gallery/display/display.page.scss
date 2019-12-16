@@ -1,36 +1,39 @@
 gallery-card {
-    margin-left: 0px;
-    margin-right: 0px;
-    max-height: 100%;
-    display: flex;
+  margin-left: 0px;
+  margin-right: 0px;
+  max-height: 100%;
+  display: flex;
   flex-direction: column;
-    }
+}
 
-    .gallery-card img {
-      //max-height: 35vh;
-      overflow: hidden;
-    }
- 
-    
-    // .header {
-    //     height: 20px;
-    //     padding: 10px;
-    //     color:red;
-    //     font-size: 4rem !important; // Default should be 2.0rem
-    //   }
-      
-    //   .sub-header {
-    //     height: 40px;
-    //   }
+.gallery-card img {
+  //max-height: 35vh;
+  overflow: hidden;
+}
 
-    //   ion-card-header {
-    //     height: 30px;
-    //     padding: 10px;
-    //     background-color: rgba(18, 22, 27, 0.404);
-    //     font-weight: 200; 
-    //     }
+.swiper-slide {
+  text-align: left;
+}
+// .header {
+//     height: 20px;
+//     padding: 10px;
+//     color:red;
+//     font-size: 4rem !important; // Default should be 2.0rem
+//   }
 
-        .button-bar {
-            height: 40px;
-            background-color: rgba(18, 22, 27, 0.404);
-          }
+//   .sub-header {
+//     height: 40px;
+//   }
+
+//   ion-card-header {
+//     height: 30px;
+//     padding: 10px;
+//     background-color: rgba(18, 22, 27, 0.404);
+//     font-weight: 200;
+//     }
+
+.button-bar {
+  padding: 10px;
+  height: 40px;
+  background-color: yellowgreen;
+}

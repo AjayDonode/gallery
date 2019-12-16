@@ -6,8 +6,7 @@ import { ImageData } from '../addgallery/ImageData';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Gallery } from '../addgallery/Gallery';
-import { switchMap } from 'rxjs/internal/operators/switchMap';
-import { Observable } from 'rxjs';
+import { SeoService } from 'src/app/services/seo.service';
 
 
 @Component({
@@ -22,12 +21,13 @@ export class DisplayPage implements OnInit {
   loaded = false;
   galleryId: any;
 
-  constructor(private router: Router, private arouter: ActivatedRoute, private imageDBService: GalleryService) {
+  constructor(private router: Router, private arouter: ActivatedRoute, private imageDBService: GalleryService,
+    private sharing: SeoService) {
     this.galleryId = this.arouter.snapshot.queryParamMap.get('id');
   }
   ngOnInit() {
     if (this.galleryId) {
-      this.gallery = this.loadGallery();
+      this.loadGallery();
     }
   }
 
@@ -35,7 +35,12 @@ export class DisplayPage implements OnInit {
     this.imageDBService.getImagesForGallery(this.galleryId).subscribe(res => {
       console.log(res);
       this.gallery = res;
-      return this.gallery;
+      this.shareLink(this.gallery);
     });
   }
+
+  shareLink(gallery: Gallery) {
+    this.sharing.addTwitterCard(gallery.name, null, gallery.images[0].filepath);
+  }
+
 }

@@ -45,7 +45,7 @@ export class AddgalleryPage implements OnInit {
   UploadedFileURL: Observable<string>;
   currentImage: ImageData = {
     name: "",
-    sequence: 0,
+    sequence: 1,
     description: "",
     filepath: "",
   };
@@ -68,18 +68,18 @@ export class AddgalleryPage implements OnInit {
 
   generateBlankGallery(gallery: Gallery) {
     gallery.images = [];
-    for (let i = 0; i <= 10; i++) {
-      const image: ImageData = {
-        name: "",
-        sequence: i,
-        description: "",
-        filepath: "",
-      };
-      gallery.images.push(image);
-    }
+    // for (let i = 1; i <= 10; i++) {
+    //   const image: ImageData = {
+    //     name: "",
+    //     sequence: i,
+    //     description: "",
+    //     filepath: "",
+    //   };
+    //   gallery.images.push(image);
+    // }
   }
 
-  addImages(event: FileList) {
+  addImages(image: ImageData, event: FileList) {
     // The File object
     const file = event.item(0);
     // Validation for Images Only
@@ -102,30 +102,16 @@ export class AddgalleryPage implements OnInit {
     // Get file progress percentage
 
 
-    this.UploadedFileURL = fileRef.getDownloadURL();
+    // this.UploadedFileURL = fileRef.getDownloadURL();
     this.percentage = this.task.percentageChanges();
     this.snapshot = this.task.snapshotChanges().pipe(
       finalize(() => {
         // Get uploaded file storage path
-        this.UploadedFileURL = fileRef.getDownloadURL();
-        this.UploadedFileURL.subscribe(resp => {
+        // this.UploadedFileURL = fileRef.getDownloadURL();
+        fileRef.getDownloadURL().subscribe(resp => {
           document.querySelector('img').src = resp;
-
-          if (this.gallery.images == null) {
-            this.gallery.images = [];
-            this.sequence = 0;
-          }
-          this.sequence++;
-
-          let image: ImageData = {
-            name: file.name,
-            sequence: this.sequence,
-            filepath: resp,
-            description: "this.fileSizeTest"
-          };
-
-          this.gallery.images.push(image);
-          this.imageService.update(this.gallery);
+          this.currentImage.filepath = resp;
+          this.gallery.images.push(this.currentImage);
           this.isUploading = false;
           this.isUploaded = true;
         }, error => {
@@ -136,6 +122,20 @@ export class AddgalleryPage implements OnInit {
         this.fileSize = snap.totalBytes;
       })
     )
+  }
+
+  saveGallery(){
+    this.imageService.update(this.gallery);
+  }
+
+  addNext(){
+    document.querySelector('img').src = "";
+    this.currentImage = {
+      name: "",
+      sequence: this.gallery.images.length,
+      description: "",
+      filepath: "",
+    };
   }
 
   ngOnInit() {

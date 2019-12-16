@@ -10,15 +10,20 @@
     </ion-toolbar>
   </ion-header>
 </ion-header>
-
+<div *ngIf="percentage | async as pct">
+    <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+  </div>
+  <div *ngIf="snapshot | async as snap">
+    <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
+  </div>
 <ion-content>
-  <ion-card *ngFor="let image of gallery.images" id="{{ image.name }}">
+  <ion-card>
       <ion-item>
           <ion-label position="floating">Sequence</ion-label>
-          <ion-input  [(ngModel)]="image.sequence"></ion-input>
+          <ion-input  [(ngModel)]="currentImage.sequence"></ion-input>
         </ion-item>
-        <ion-item>
-            <img src="{{image.filepath}}"/>
+         <ion-item [hidden]="!currentImage.filepath" >
+            <img src="{{currentImage.filepath}}" />
         </ion-item>
     <ion-item>
   
@@ -27,24 +32,24 @@
         id="uploadBtn"
         type="file"
         class="upload"
-        (change)="addImages($event.target.files)"
+        (change)="addImages(currentImage.sequence, $event.target.files)"
       />
     </ion-item>
     <ion-item>
       <ion-label position="floating">Title</ion-label>
-      <ion-input  [(ngModel)]="image.name"></ion-input>
+      <ion-input  [(ngModel)]="currentImage.name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Description</ion-label>
-      <ion-textarea [(ngModel)]="image.description"></ion-textarea>
+      <ion-textarea [(ngModel)]="currentImage.description"></ion-textarea>
     </ion-item>
-    <div *ngIf="percentage | async as pct">
-      <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
-    </div>
-    <div *ngIf="snapshot | async as snap">
-      <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
-    </div>
-    <img />
+     <img width="150px"/>
+    <ion-row class="button-bar">
+        <ion-col>
+          <ion-button (click)="saveGallery()"> Save Gallery</ion-button> 
+        </ion-col>
+        <ion-col> <ion-button (click)="addNext()"> Save and Add </ion-button> </ion-col>
+      </ion-row>
   </ion-card>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
