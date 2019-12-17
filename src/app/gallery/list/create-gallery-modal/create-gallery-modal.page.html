@@ -17,18 +17,18 @@
       
       <ion-item>
         <ion-label position="floating">Description</ion-label>
-        <ion-textarea [(ngModel)]="gallery.description" ></ion-textarea>
+        <ion-textarea rows="10" [(ngModel)]="gallery.description" ></ion-textarea>
       </ion-item>
-
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button (click)="closeModal()" color="warning"
+            >Cancel</ion-button
+          >
+          <ion-button (click)="saveGallery()">Save ></ion-button>
+        </ion-col>
+      </ion-row>
 </ion-content>
 
 <ion-footer>
-  <ion-row>
-    <ion-col class="ion-text-center">
-      <ion-button (click)="closeModal()" color="warning"
-        >Cancel</ion-button
-      >
-      <ion-button (click)="saveGallery()">Save</ion-button>
-    </ion-col>
-  </ion-row>
+  
 </ion-footer>

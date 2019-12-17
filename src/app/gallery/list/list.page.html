@@ -9,7 +9,7 @@
   <ion-list>
       <ion-item *ngFor="let gallery of gallerylist" >
       <ion-label>
-          <h2>{{gallery.name}}</h2>
+         <a href="/gallery?id={{gallery.id}}"> <h2>{{gallery.name}}</h2> </a>
           <p>{{gallery.description}}</p>
         </ion-label> 
         <ion-icon name="remove-circle-outline" (click)="deleteItem(gallery)"></ion-icon>

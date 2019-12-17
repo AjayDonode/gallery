@@ -22,7 +22,7 @@ export class DisplayPage implements OnInit {
   galleryId: any;
 
   constructor(private router: Router, private arouter: ActivatedRoute, private imageDBService: GalleryService,
-    private sharing: SeoService) {
+              private sharing: SeoService) {
     this.galleryId = this.arouter.snapshot.queryParamMap.get('id');
   }
   ngOnInit() {
@@ -33,7 +33,6 @@ export class DisplayPage implements OnInit {
 
   async loadGallery() {
     this.imageDBService.getImagesForGallery(this.galleryId).subscribe(res => {
-      console.log(res);
       this.gallery = res;
       this.shareLink(this.gallery);
     });

@@ -23,7 +23,7 @@
           <ion-input  [(ngModel)]="currentImage.sequence"></ion-input>
         </ion-item>
          <ion-item [hidden]="!currentImage.filepath" >
-            <img src="{{currentImage.filepath}}" />
+            <img width="150px" src="{{currentImage.filepath}}" />
         </ion-item>
     <ion-item>
   
@@ -43,7 +43,7 @@
       <ion-label position="stacked">Description</ion-label>
       <ion-textarea [(ngModel)]="currentImage.description"></ion-textarea>
     </ion-item>
-     <img width="150px"/>
+     <!-- <img /> -->
     <ion-row class="button-bar">
         <ion-col>
           <ion-button (click)="saveGallery()"> Save Gallery</ion-button> 

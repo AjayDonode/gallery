@@ -24,7 +24,9 @@ export class AddgalleryPage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
         this.gallery = this.router.getCurrentNavigation().extras.state.gallery;
         if (this.gallery.images != null && this.gallery.images.length > 0) {
-          this.currentImage = this.gallery.images[0];
+          this.currentIndex = 0;
+          this.currentImage = this.gallery.images[this.currentIndex];
+          
         } else {
           this.generateBlankGallery(this.gallery);
         }
@@ -61,6 +63,7 @@ export class AddgalleryPage implements OnInit {
   imgURL: any;
   public message: string;
   fileData: File = null;
+  currentIndex: number = 0;
 
   ////
   imageResponse: any;
@@ -68,15 +71,6 @@ export class AddgalleryPage implements OnInit {
 
   generateBlankGallery(gallery: Gallery) {
     gallery.images = [];
-    // for (let i = 1; i <= 10; i++) {
-    //   const image: ImageData = {
-    //     name: "",
-    //     sequence: i,
-    //     description: "",
-    //     filepath: "",
-    //   };
-    //   gallery.images.push(image);
-    // }
   }
 
   addImages(image: ImageData, event: FileList) {
@@ -124,18 +118,24 @@ export class AddgalleryPage implements OnInit {
     )
   }
 
-  saveGallery(){
+  saveGallery() {
     this.imageService.update(this.gallery);
   }
 
-  addNext(){
-    document.querySelector('img').src = "";
-    this.currentImage = {
-      name: "",
-      sequence: this.gallery.images.length,
-      description: "",
-      filepath: "",
-    };
+  addNext() {
+    if (this.currentIndex < this.gallery.images.length-1) {
+      this.currentIndex++;
+      this.currentImage = this.gallery.images[this.currentIndex];
+    } else {
+      this.currentImage = {
+        name: "",
+        sequence: this.currentIndex,
+        description: "",
+        filepath: "",
+      };
+      this.currentIndex++;
+    }
+    document.querySelector('img').src = this.currentImage.filepath;
   }
 
   ngOnInit() {
