@@ -7,6 +7,33 @@
 </ion-header>
 <ion-content class="gallery-card" fullscreen>
   <ion-slides>
+      <ion-slide >
+          <ion-card >
+              <!-- <ion-card-content> -->
+                
+                <ion-card-header>
+                  <ion-card-title >{{ gallery.name }}</ion-card-title>
+                  <!-- <ion-card-subtitle>{{ data.description }}</ion-card-subtitle> -->
+                </ion-card-header>
+                <ion-card-content>
+                 <p [innerHTML]=gallery.description></p>  
+                </ion-card-content>
+
+                <ion-row>
+                    <ion-col><img src="/assets/swipe-helper.gif"/> </ion-col>
+                    <ion-col justify-content-center>Swipe to navigate>></ion-col> 
+                </ion-row>
+                <ion-row class="button-bar">
+                  <ion-col>
+                    <ion-icon name="thumbs-up"></ion-icon> <ion-label>12</ion-label>
+                  </ion-col>
+                  <ion-col> <ion-icon name="text"></ion-icon>4 </ion-col>
+                  <ion-col> <ion-icon name="share-alt" (click)="shareLink(gallery)"></ion-icon > Share </ion-col>
+                </ion-row>
+              <!-- </ion-card-content> -->
+            </ion-card>
+      </ion-slide>
+      
     <ion-slide *ngFor="let data of gallery.images" id="{{ data.name }}">
       <ion-card >
         <!-- <ion-card-content> -->
@@ -21,7 +48,7 @@
             <!-- <ion-card-subtitle>{{ data.description }}</ion-card-subtitle> -->
           </ion-card-header>
           <ion-card-content>
-              {{ data.description }}
+            <p [innerHTML]=data.description></p>  
           </ion-card-content>
           <ion-row class="button-bar">
             <ion-col>

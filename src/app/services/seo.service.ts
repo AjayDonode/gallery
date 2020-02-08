@@ -15,5 +15,8 @@ export class SeoService {
     this.meta.updateTag({ name: 'og:title', content: title });
     this.meta.updateTag({ name: 'og:description', content: description });
     this.meta.updateTag({ name: 'og:image', content: img });
+    this.meta.updateTag({ name: 'twitter:card', content: description });
+    this.meta.updateTag({ name: 'twitter:site', content: title });
+    this.meta.updateTag({ name: 'og:image:alt', content: title });
   }
 }

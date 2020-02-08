@@ -14,17 +14,19 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 // import { FileSizeFormatPipe } from './components/file-size-format.pipe';
 import { CreateGalleryPageModule } from './gallery/list/create-gallery-modal/create-gallery-modal.module';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CreateGalleryPageModule,
-           AngularFireModule.initializeApp(environment.firebase, 'my-app-name'), // imports firebase/app needed for everything
+           AngularFireModule.initializeApp(environment.firebase, 'My-Gallery'), // imports firebase/app needed for everything
   AngularFirestoreModule, // imports firebase/firestore, only needed for database features
   AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    GoogleAnalytics,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

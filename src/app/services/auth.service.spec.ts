@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PageCounterService } from './pagecounter.service';
+import { AuthService } from './auth.service';
 
-describe('PagecounterService', () => {
+describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PageCounterService = TestBed.get(PageCounterService);
+    const service: AuthService = TestBed.get(AuthService);
     expect(service).toBeTruthy();
   });
 });

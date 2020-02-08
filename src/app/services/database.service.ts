@@ -40,4 +40,5 @@ export class DatabaseService {
       console.log('error while storing to DB' + error);
     });
   }
+
 }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Gallery } from '../gallery/addgallery/Gallery';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class GalleryService {
   private gallerylist: Observable<Gallery[]>;
   private galleryCollection: AngularFirestoreCollection<Gallery>;
 
-  constructor(private storage: AngularFireStorage, private database: AngularFirestore) {
+  constructor(private database: AngularFirestore) {
     this.galleryCollection = database.collection<Gallery>('Gallery');
     this.gallerylist = this.galleryCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
@@ -51,7 +50,7 @@ export class GalleryService {
     return this.galleryCollection.doc(gallery.id).update(gallery);
   }
 
-  getImagesForGallery(galleryId: string) {
+  getGallery(galleryId: string) {
      return this.galleryCollection.doc<Gallery>(galleryId).valueChanges();
   }
 }

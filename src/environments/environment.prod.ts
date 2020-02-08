@@ -4,7 +4,15 @@
 
 export const environment = {
   production: true,
-  
+  firebase: {
+    apiKey: "AIzaSyDOq5ZkWDTkC66g5_oh4xEJ8HsJZ6PAKRk",
+    authDomain: "gallery-eafb1.firebaseapp.com",
+    databaseURL: "https://gallery-eafb1.firebaseio.com",
+    projectId: "gallery-eafb1",
+    storageBucket: "gallery-eafb1.appspot.com",
+    messagingSenderId: "668399931778",
+    appId: "1:668399931778:web:8853a6058d1403e0c57f9b",
+    measurementId: "G-20HKKP2LMD"
 }
 };
 
