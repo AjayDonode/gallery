@@ -12,21 +12,34 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
-// import { FileSizeFormatPipe } from './components/file-size-format.pipe';
+import { AuthenticationService } from './services/authentication.service';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CreateGalleryPageModule } from './gallery/list/create-gallery-modal/create-gallery-modal.module';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import * as firebase from 'firebase';
+import { ReactiveFormsModule } from '@angular/forms';
+
+firebase.initializeApp(environment.firebase);
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, CreateGalleryPageModule,
-           AngularFireModule.initializeApp(environment.firebase, 'My-Gallery'), // imports firebase/app needed for everything
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    CreateGalleryPageModule,
+    AngularFireModule.initializeApp(environment.firebase, 'My-Gallery'), // imports firebase/app needed for everything
   AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-  AngularFireStorageModule // imports firebase/storage only needed for storage features
+  AngularFireStorageModule, // imports firebase/storage only needed for storage features
+  AngularFireAuthModule // import for Auth and users storage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GoogleAnalytics,
+    AuthenticationService,
+    ReactiveFormsModule,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

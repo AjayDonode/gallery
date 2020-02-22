@@ -1,22 +1,23 @@
-<ion-content  padding>
-  <form #form="ngForm" (ngSubmit)="login(form)">
+<ion-content  class="ion-padding">
+  <form [formGroup]="validationsForm" (ngSubmit)="login(validationsForm.value)">
     <ion-grid>
-      <ion-row color="primary" justify-content-center>
+      <ion-row color="primary" lass="ion-justify-content-center">
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
             <h3>Login</h3>
           </div>
-          <div padding>
+          <div class="ion-padding">
             <ion-item>
-              <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
+              <ion-input type="email" placeholder="your@email.com" formControlName="email" required></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+              <ion-input type="password" placeholder="Password" formControlName="password" required></ion-input>
             </ion-item>
           </div>
-          <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+          <div class="ion-padding">
+            <ion-button size="large" type="submit" [disabled]="validationsForm.invalid" expand="block">Login</ion-button>
           </div>
+          <label class="error-message">{{errorMessage}}</label>
         </ion-col>
       </ion-row>
       <ion-row>
