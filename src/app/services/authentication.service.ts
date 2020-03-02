@@ -17,6 +17,7 @@ export class AuthenticationService {
 
   loginUser(value) {
       return new Promise<any>((resolve, reject) => {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         firebase.auth().signInWithEmailAndPassword(value.email, value.password)
         .then(
           res => resolve(res),
