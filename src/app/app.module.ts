@@ -25,14 +25,14 @@ firebase.initializeApp(environment.firebase);
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
-    AppRoutingModule, 
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     CreateGalleryPageModule,
     AngularFireModule.initializeApp(environment.firebase, 'My-Gallery'), // imports firebase/app needed for everything
-  AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-  AngularFireStorageModule, // imports firebase/storage only needed for storage features
-  AngularFireAuthModule // import for Auth and users storage
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFireAuthModule // import for Auth and users storage
   ],
   providers: [
     StatusBar,

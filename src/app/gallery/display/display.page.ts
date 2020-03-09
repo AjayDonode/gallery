@@ -21,7 +21,7 @@ export class DisplayPage implements OnInit {
   galleryId: any;
   visitor: PageVisitorTrack;
 
-  constructor(private router: Router, private arouter: ActivatedRoute, private imageDBService: GalleryService,
+  constructor(private arouter: ActivatedRoute, private imageDBService: GalleryService,
               private sharing: SeoService , private pageViewService: PageCounterService) {
     this.galleryId = this.arouter.snapshot.queryParamMap.get('id');
     this.pageViewService.get(this.galleryId).subscribe(res => {

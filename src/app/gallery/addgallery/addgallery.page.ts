@@ -19,14 +19,14 @@ import { GalleryService } from 'src/app/services/gallery.service';
 export class AddgalleryPage implements OnInit {
   gallery: Gallery;
   constructor(private storage: AngularFireStorage, private imageService: GalleryService, public modalController: ModalController,
-    private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private router: Router) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.gallery = this.router.getCurrentNavigation().extras.state.gallery;
         if (this.gallery.images != null && this.gallery.images.length > 0) {
           this.currentIndex = 0;
           this.currentImage = this.gallery.images[this.currentIndex];
-          
+
         } else {
           this.generateBlankGallery(this.gallery);
         }
@@ -71,6 +71,7 @@ export class AddgalleryPage implements OnInit {
 
   generateBlankGallery(gallery: Gallery) {
     gallery.images = [];
+   // gallery.createdby = TODO fetch user
   }
 
   addImages(image: ImageData, event: FileList) {
@@ -78,7 +79,7 @@ export class AddgalleryPage implements OnInit {
     const file = event.item(0);
     // Validation for Images Only
     if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type :( ')
+      console.error('unsupported file type :( ');
       return;
     }
 
@@ -123,7 +124,7 @@ export class AddgalleryPage implements OnInit {
   }
 
   addNext() {
-    if (this.currentIndex < this.gallery.images.length-1) {
+    if (this.currentIndex < this.gallery.images.length - 1) {
       this.currentIndex++;
       this.currentImage = this.gallery.images[this.currentIndex];
     } else {
