@@ -3,16 +3,30 @@
     <ion-title>
       Home
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)=openEnd()>
+        <ion-icon  name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-card class="welcome-card">
       <img src="/assets/shapes.svg" alt="" />
-      <ion-card-header>
+      <!-- <ion-card-header>
         <ion-card-subtitle>Enjoy</ion-card-subtitle>
         <ion-card-title>Welcome {{user.email}}</ion-card-title>
-      </ion-card-header>
+      </ion-card-header> -->
+      <div class="profile-card">
+        <div class="header">
+          <ion-row> <img
+            src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg"
+          />
+          <h4>Ajay Donode</h4>
+          <h4>{{user.email}}</h4></ion-row>
+        </div>
+      </div>
       <ion-card-content>
         <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
       </ion-card-content>

@@ -3,25 +3,20 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthenticationService {
+  userData: any;
   constructor() {
-
-    /* Saving user data as an object in localstorage if logged out than set to null */
-  //   firebase.auth().authState.subscribe(user => {
-  //     if (user) {
-  //       this.userData = user; // Setting up user data in userData var
-  //       localStorage.setItem('user', JSON.stringify(this.userData));
-  //       JSON.parse(localStorage.getItem('user'));
-  //     } else {
-  //       localStorage.setItem('user', null);
-  //       JSON.parse(localStorage.getItem('user'));
-  //     }
-  //   })
-  // }
-
-   }
-
-
-  
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.userData = user; // Setting up user data in userData var
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+        console.log(user.uid);
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    });
+  }
 
   registerUser(value) {
     return new Promise<any>((resolve, reject) => {
@@ -31,7 +26,6 @@ export class AuthenticationService {
           err => reject(err));
     });
   }
-
 
   loginUser(value) {
     return new Promise<any>((resolve, reject) => {
@@ -48,14 +42,17 @@ export class AuthenticationService {
   }
 
   logoutUser(): Promise<void> {
+    localStorage.removeItem('user');
     return firebase.auth().signOut();
   }
 
   getCurrentUser() {
-    const user = firebase.auth().currentUser;
-    console.log(user.email);
+    const user = localStorage.getItem('user');
+    console.log(user);
     if (user != null) {
-     return user;
+      return user;
+    } else {
+      console.log('No User found');
     }
   }
 }
