@@ -47,7 +47,7 @@ export class AuthenticationService {
   }
 
   getCurrentUser() {
-    const user = localStorage.getItem('user');
+    const user =  JSON.parse(localStorage.getItem('user'));
     console.log(user);
     if (user != null) {
       return user;

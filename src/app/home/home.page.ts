@@ -9,6 +9,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   user = null;
+  username = 'Ajay Donode';
   constructor( private authService: AuthenticationService, private menuController: MenuController) {}
   ngOnInit(): void {
     //Fetching current logged in User 
@@ -20,6 +21,7 @@ export class HomePage implements OnInit {
   }
 
   async openMenu() {
+    this.menuController.enable(true);
     await this.menuController.open();
   }
 
