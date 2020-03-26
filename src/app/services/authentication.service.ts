@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AuthenticationService {
-  userData: any;
+  authState = new BehaviorSubject(false);
+  userData: any = null;
   constructor() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.userData = user; // Setting up user data in userData var
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
-        console.log(user.uid);
+        this.authState.next(true);
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
+        this.authState.next(false);
       }
     });
   }
@@ -43,16 +46,33 @@ export class AuthenticationService {
 
   logoutUser(): Promise<void> {
     localStorage.removeItem('user');
+    this.userData = null;
     return firebase.auth().signOut();
   }
 
   getCurrentUser() {
-    const user =  JSON.parse(localStorage.getItem('user'));
-    console.log(user);
-    if (user != null) {
-      return user;
-    } else {
-      console.log('No User found');
+    if (this.userData) {
+        this.userData = JSON.parse(localStorage.getItem('user'));
+      }
+    // if (this.userData != null) {
+    //   return this.userData;
+    // } else {
+    //   throw Error('No User found');
+    // }
+    return this.userData;
+  }
+
+  isLoggedIn(): boolean {
+    let isLogged = false;
+    this.userData = this.getCurrentUser();
+    console.log(this.userData);
+    if (this.userData) {
+      isLogged = true;
     }
+    return isLogged;
+  }
+
+  isAuthenticated(): boolean {
+    return this.authState.value;
   }
 }

@@ -18,6 +18,7 @@ import { CreateGalleryPageModule } from './gallery/list/create-gallery-modal/cre
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import * as firebase from 'firebase';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ComponentsModule } from './components/components.module';
 
 firebase.initializeApp(environment.firebase);
 
@@ -29,6 +30,7 @@ firebase.initializeApp(environment.firebase);
     IonicModule.forRoot(),
     AppRoutingModule,
     CreateGalleryPageModule,
+    ComponentsModule,
     AngularFireModule.initializeApp(environment.firebase, 'My-Gallery'), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
@@ -40,6 +42,7 @@ firebase.initializeApp(environment.firebase);
     GoogleAnalytics,
     AuthenticationService,
     ReactiveFormsModule,
+    Storage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
