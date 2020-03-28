@@ -5,7 +5,7 @@ import { Gallery } from '../addgallery/Gallery';
 import { SeoService } from 'src/app/services/seo.service';
 import { PageCounterService } from 'src/app/services/pagecounter.service';
 import { PageVisitorTrack } from 'src/app/modals/PageVisitorTrack';
-import * as Data from '../../../assets/Data.json';
+import { LoaderService } from 'src/app/services/loader-service.service';
 
 
 @Component({
@@ -22,29 +22,24 @@ export class DisplayPage implements OnInit {
   visitor: PageVisitorTrack;
 
   constructor(private arouter: ActivatedRoute, private imageDBService: GalleryService,
-              private sharing: SeoService , private pageViewService: PageCounterService) {
-    this.galleryId = this.arouter.snapshot.queryParamMap.get('id');
-    this.pageViewService.get(this.galleryId).subscribe(res => {
-      this.visitor = res;
-      this.visitor.visitcount++;
-      console.log("Loading Json Data "+Data);
-    });
-
-    
-  }
+              private sharing: SeoService , private pageViewService: PageCounterService,
+              private loader: LoaderService) { }
   ngOnInit() {
+    this.loader.loadingPresent('Loading', 1000);
+    this.galleryId = this.arouter.snapshot.paramMap.get('id');
     if (this.galleryId) {
       this.loadGallery();
-      //this.ionViewDidLoad();
-      console.log("Loading Json Data "+Data);
+      this.setPageView();
+      // this.ionViewDidLoad();
     }
   }
 
   async loadGallery() {
     this.imageDBService.getGallery(this.galleryId).subscribe(res => {
       this.gallery = res;
+      this.loader.loadingDismiss();
       this.shareLink(this.gallery);
-      this.ionViewDidLoad();
+      this.loaded = true;
     });
   }
 
@@ -52,8 +47,14 @@ export class DisplayPage implements OnInit {
     this.sharing.addTwitterCard(gallery.name, gallery.description, gallery.images[0].filepath);
   }
 
-  ionViewDidLoad() {
-    console.log("Here is solution");
-    this.pageViewService.update(this.visitor);
+  setPageView() {
+      this.pageViewService.get(this.galleryId).subscribe(res => {
+      this.visitor = res;
+      this.visitor.visitcount++;
+    });
   }
+
+  // ionViewDidLoad() {
+  //   // this.pageViewService.update(this.visitor);
+  // }
 }

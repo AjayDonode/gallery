@@ -4,6 +4,7 @@ import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthenticationService } from './services/authentication.service';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { AuthenticationService } from './services/authentication.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-user: any;
+user: User = null;
 
   constructor(
     private navCtrl: NavController,
@@ -19,8 +20,7 @@ user: any;
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthenticationService,
-    private menuController: MenuController
-  ) {
+    private menuController: MenuController) {
     this.initializeApp();
   }
 

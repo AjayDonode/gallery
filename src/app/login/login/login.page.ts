@@ -30,25 +30,24 @@ export class LoginPage implements OnInit {
 
     this.validationsForm = this.formBuilder.group({
       email: new FormControl(
-        'testuser@gmail.com',
+        '',
         Validators.compose([
           Validators.required,
           Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
         ])
       ),
       password: new FormControl(
-        'testuser',
+        '',
         Validators.compose([Validators.minLength(5), Validators.required])
       )
     });
   }
 
-
   handleExistingSession() {
     const isLoggedIn = this.authService.isLoggedIn();
-    console.log("is IN " + isLoggedIn);
+    console.log("LoginPage User " + isLoggedIn);
     if (isLoggedIn) {
-      this.navCtrl.navigateForward('/user/home');
+      this.router.navigate(['/user/home']);
     }
   }
 
@@ -56,7 +55,7 @@ export class LoginPage implements OnInit {
     this.authService.loginUser(value).then(
       res => {
         this.errorMessage = '';
-        this.navCtrl.navigateForward('/user/home');
+        this.router.navigate(['/user/home']);
         // this.router.navigate(['user']);
       },
       err => {

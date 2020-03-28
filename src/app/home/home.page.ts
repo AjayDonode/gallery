@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { MenuController } from '@ionic/angular';
+import { GalleryService } from '../services/gallery.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +11,20 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   user = null;
-  username = 'Ajay Donode';
-  constructor( private authService: AuthenticationService, private menuController: MenuController) {}
+  username = null;
+  gallerylist: any;
+  constructor( private authService: AuthenticationService,
+               private menuController: MenuController,
+               private router: Router,
+               private galleryService: GalleryService) {}
   ngOnInit(): void {
-    //Fetching current logged in User 
+    // Fetching current logged in User 
     this.user =  this.authService.getCurrentUser();
+    this.username = this.user.displayName;
+
+    this.galleryService.getGalleryList().subscribe(res => {
+      this.gallerylist = res;
+    });
   }
 
   openEnd() {
@@ -25,4 +36,7 @@ export class HomePage implements OnInit {
     await this.menuController.open();
   }
 
+  doClick(event) {
+    this.router.navigate(['/gallery/', event]);
+  }
 }

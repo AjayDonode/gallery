@@ -56,7 +56,7 @@ export class PageCounterService {
     this.get(pageId).subscribe(res => {
       this.visitor = res;
       this.visitor.visitcount++;
-      //this.update(this.visitor);
+      this.update(this.visitor);
     });
     return this.visitor;
   }

@@ -1,15 +1,15 @@
 <ion-app>
   <ion-menu side="end" id="setting" contentId="main-content">
     <ion-header>
-      <ion-toolbar *ngIf="user">
-        <div *ngIf="user.displayName; else email">
+      <ion-toolbar>
+        <div *ngIf="user?.displayName; else email">
           <ion-title>
-            {{user.displayName}}
+            {{user?.displayName}}
           </ion-title>
         </div>
         <ng-template #email>
           <ion-title>
-            {{user.email}}
+            {{user?.email}}
           </ion-title>
         </ng-template>
       </ion-toolbar>

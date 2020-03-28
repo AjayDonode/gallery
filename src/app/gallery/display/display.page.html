@@ -1,22 +1,25 @@
 <ion-header translucent color="primary">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/user/home"></ion-back-button>
+    </ion-buttons>
     <ion-title>
-      {{ gallery.name }}
+      {{ gallery?.name }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="gallery-card" fullscreen>
+<ion-content class="gallery-card" *ngIf="gallery !== undefined" fullscreen>
   <ion-slides>
       <ion-slide >
           <ion-card >
               <!-- <ion-card-content> -->
                 
                 <ion-card-header>
-                  <ion-card-title >{{ gallery.name }}</ion-card-title>
+                  <ion-card-title >{{ gallery?.name }}</ion-card-title>
                   <!-- <ion-card-subtitle>{{ data.description }}</ion-card-subtitle> -->
                 </ion-card-header>
                 <ion-card-content>
-                 <p [innerHTML]=gallery.description></p>  
+                 <p [innerHTML]=gallery?.description></p>  
                 </ion-card-content>
 
                 <ion-row>
@@ -34,7 +37,7 @@
             </ion-card>
       </ion-slide>
       
-    <ion-slide *ngFor="let data of gallery.images" id="{{ data.name }}">
+    <ion-slide *ngFor="let data of gallery?.images" id="{{ data.name }}">
       <ion-card >
         <!-- <ion-card-content> -->
           <img

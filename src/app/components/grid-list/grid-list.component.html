@@ -1,16 +1,24 @@
 <p>
-  grid-list works! here 
-  <ion-list>
+  <ion-list-header color='secondry'>
+    <ion-label>{{label}}</ion-label> <ion-chip> <ion-icon [hidden]="isGrid" name="grid" (click)="toggleIcon()"  ></ion-icon> <ion-icon [hidden]="!isGrid" name="list" (click)="toggleIcon()" ></ion-icon></ion-chip>
+    <!-- <ion-item-devider></ion-item-devider> -->
+  </ion-list-header>
+  <ion-list [hidden]="isGrid">
     <ion-item *ngFor="let gallery of data" >
     <ion-label>
-       <a href="/gallery?id={{gallery.id}}"> <h2>{{gallery.name}}</h2> </a>
-        <p>{{gallery.description}}</p>
+       <a (click)="clickLink(gallery.id)"> <h3>{{gallery.name}}</h3> </a>
       </ion-label> 
-       <!-- <ion-icon name="remove-circle-outline" (click)="deleteItem(gallery)"></ion-icon>
-      <ion-icon name="create" (click)="editItem(gallery)"></ion-icon>
-      <button ion-button clear (click)="deleteTask(i)">
-          <ion-icon name="trash"></ion-icon>
-        </button> -->
   </ion-item>
 </ion-list>
+<ion-grid [hidden]="!isGrid">
+    <ion-row>
+      <ion-col *ngFor="let gallery of data">
+        <div>
+          <ion-label>
+            <a href="/gallery?id={{gallery.id}}"> <h3>{{gallery.name}}</h3> </a>
+           </ion-label> 
+        </div>
+      </ion-col>
+    </ion-row>
+</ion-grid>
 </p>
