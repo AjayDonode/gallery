@@ -6,7 +6,7 @@
   <ion-list [hidden]="isGrid">
     <ion-item *ngFor="let gallery of data" >
     <ion-label>
-       <a (click)="clickLink(gallery.id)"> <h3>{{gallery.name}}</h3> </a>
+       <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
       </ion-label> 
   </ion-item>
 </ion-list>
@@ -15,7 +15,7 @@
       <ion-col *ngFor="let gallery of data">
         <div>
           <ion-label>
-            <a href="/gallery?id={{gallery.id}}"> <h3>{{gallery.name}}</h3> </a>
+            <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
            </ion-label> 
         </div>
       </ion-col>

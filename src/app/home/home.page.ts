@@ -13,16 +13,16 @@ export class HomePage implements OnInit {
   user = null;
   username = null;
   gallerylist: any;
-  constructor( private authService: AuthenticationService,
-               private menuController: MenuController,
-               private router: Router,
-               private galleryService: GalleryService) {}
+  constructor(private authService: AuthenticationService,
+              private menuController: MenuController,
+              private router: Router,
+              private galleryService: GalleryService) { }
   ngOnInit(): void {
-    // Fetching current logged in User 
-    this.user =  this.authService.getCurrentUser();
+    // Fetching current logged in User
+    this.user = this.authService.getCurrentUser();
     this.username = this.user.displayName;
 
-    this.galleryService.getGalleryList().subscribe(res => {
+    this.galleryService.getUserGalleryList(this.user).subscribe(res => {
       this.gallerylist = res;
     });
   }

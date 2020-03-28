@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
-import { AngularFireStorage } from "@angular/fire/storage";
+import { Injectable } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import {
   AngularFirestore,
   AngularFirestoreCollection
-} from "@angular/fire/firestore";
-import { PageVisitorTrack } from "../modals/PageVisitorTrack";
-import { map, flatMap } from "rxjs/operators";
-import { Observable } from "rxjs";
+} from '@angular/fire/firestore';
+import { PageVisitorTrack } from '../modals/PageVisitorTrack';
+import { map, flatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PageCounterService {
   visitor: PageVisitorTrack;
@@ -31,7 +31,7 @@ export class PageCounterService {
 
   createVisitor(PAGE_ID: string) {
     // Create an ID for document
-    let visitor: PageVisitorTrack = {
+    const visitor: PageVisitorTrack = {
               pageid: PAGE_ID,
               visitcount: 1
             };

@@ -37,6 +37,7 @@
         <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
       </ion-card-content>
       <app-grid-list [data] ='gallerylist' [label] = "'My Pages'" (itemClicked)="doClick($event)" > </app-grid-list>
+      <a [routerLink]="['/list']" routerLinkActive="router-link-active" > Edit</a>
     </ion-card>
     
 </ion-content>

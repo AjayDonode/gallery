@@ -25,6 +25,17 @@ export class GalleryService {
     );
   }
 
+  getUserGalleryList(user: any) {
+    console.log("=========================");
+    console.log(user);
+    this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
+      // Compose a query using multiple .where() methods
+      return ref.where('createdby', '==', user.uid);
+    });
+    this.gallerylist = this.galleryCollection.valueChanges();
+    return this.gallerylist;
+  }
+
   getGalleryList() {
     return this.gallerylist;
   }

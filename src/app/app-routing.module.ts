@@ -26,14 +26,15 @@ const routes: Routes = [
       import('./gallery/addgallery/addgallery.module').then(m => m.AddgalleryPageModule)
   },
   {
-    path: 'gallery/list',
+    path: 'list',
     loadChildren: () =>
-      import('./gallery/list/list.module').then(m => m.ListPageModule)
+      import('./gallery/list/list.module').then(m => m.ListPageModule),
+      canActivate: [AuthGuard]
   },
   { path: 'display', loadChildren: './gallery/display/display.module#DisplayPageModule' },
   // { path: 'modals', loadChildren: './gallery/modals/modals.module#ModalsPageModule' },
   // { path: 'addgallery', loadChildren: './gallery/addgallery/addgallery.module#AddgalleryPageModule' },
-  { path: 'list', loadChildren: './gallery/list/list.module#ListPageModule' },
+  // { path: 'list', loadChildren: './gallery/list/list.module#ListPageModule' },
   // { path: 'register', loadChildren: './login/register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './login/login/login.module#LoginPageModule' }
 ];
