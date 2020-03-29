@@ -62,6 +62,10 @@ export class AuthenticationService {
     return this.userData;
   }
 
+  getCurrentUserId() {
+    return this.userData.uid;
+  }
+
   isLoggedIn(): boolean {
     let isLogged = false;
     this.userData = this.getCurrentUser();

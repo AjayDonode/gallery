@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Gallery } from '../gallery/addgallery/Gallery';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class GalleryService {
   private gallerylist: Observable<Gallery[]>;
   private galleryCollection: AngularFirestoreCollection<Gallery>;
 
-  constructor(private database: AngularFirestore) {
+  constructor(private database: AngularFirestore , private authenticationService: AuthenticationService) {
     this.galleryCollection = database.collection<Gallery>('Gallery');
     this.gallerylist = this.galleryCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
@@ -26,8 +27,6 @@ export class GalleryService {
   }
 
   getUserGalleryList(user: any) {
-    console.log("=========================");
-    console.log(user);
     this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
       // Compose a query using multiple .where() methods
       return ref.where('createdby', '==', user.uid);
@@ -58,6 +57,7 @@ export class GalleryService {
   }
 
   update(gallery: Gallery) {
+    gallery.createdby = this.authenticationService.getCurrentUserId();
     return this.galleryCollection.doc(gallery.id).update(gallery);
   }
 

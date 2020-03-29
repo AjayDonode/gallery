@@ -5,30 +5,42 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-    <ion-item>
-        <ion-label position="floating">Title</ion-label>
-        <ion-input [(ngModel)]="gallery.name"></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="floating">Tags</ion-label>
-        <ion-input [(ngModel)]="gallery.tags"></ion-input>
-      </ion-item>
-      
-      <ion-item>
-        <ion-label position="floating">Description</ion-label>
-        <ion-textarea rows="10" [(ngModel)]="gallery.description" ></ion-textarea>
-      </ion-item>
-      <ion-row>
-        <ion-col class="ion-text-center">
-          <ion-button (click)="closeModal()" color="warning"
-            >Cancel</ion-button
-          >
-          <ion-button (click)="saveGallery()">Save ></ion-button>
-        </ion-col>
-      </ion-row>
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input [(ngModel)]="gallery.name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tags</ion-label>
+    <ion-input [(ngModel)]="gallery.tags"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Description</ion-label>
+    <ion-textarea rows="10" [(ngModel)]="gallery.description"></ion-textarea>
+  </ion-item>
+
 </ion-content>
 
 <ion-footer>
-  
+  <!-- <ion-row>
+    <ion-col class="ion-text-center">
+      <ion-button (click)="closeModal()" color="warning"
+        >Cancel</ion-button
+      >
+      <ion-button (click)="saveGallery()"></ion-button>
+    </ion-col>
+  </ion-row> -->
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="cancel"></ion-icon>Cancel
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="saveGallery()">
+        <ion-icon name="save"></ion-icon>Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-footer>

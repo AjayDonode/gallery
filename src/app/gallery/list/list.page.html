@@ -9,14 +9,12 @@
   <ion-list>
       <ion-item *ngFor="let gallery of gallerylist" >
       <ion-label>
-         <a href="/gallery?id={{gallery.id}}"> <h2>{{gallery.name}}</h2> </a>
+         <a [routerLink]="['/gallery/', gallery.id]" routerLinkActive="router-link-active"> <h2>{{gallery.name}}</h2> </a>
           <p>{{gallery.description}}</p>
         </ion-label> 
-         <!-- <ion-icon name="remove-circle-outline" (click)="deleteItem(gallery)"></ion-icon>
         <ion-icon name="create" (click)="editItem(gallery)"></ion-icon>
-        <button ion-button clear (click)="deleteTask(i)">
-            <ion-icon name="trash"></ion-icon>
-          </button> -->
+        <ion-icon name="trash" (click)="deleteItem(gallery)"></ion-icon>
+          
     </ion-item>
   </ion-list>
 

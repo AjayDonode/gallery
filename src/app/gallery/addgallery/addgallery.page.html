@@ -2,59 +2,57 @@
   <ion-header>
     <ion-toolbar>
       <ion-title>{{gallery.name}}</ion-title>
-      <ion-buttons slot="start">
+      <!-- <ion-buttons slot="start">
         <ion-button (click)="homepage()">
           <ion-icon name="home"></ion-icon>
         </ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
     </ion-toolbar>
   </ion-header>
 </ion-header>
 <div *ngIf="percentage | async as pct">
-    <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
-  </div>
-  <div *ngIf="snapshot | async as snap">
-    <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
-  </div>
+  <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+</div>
+<div *ngIf="snapshot | async as snap">
+  <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
+</div>
 <ion-content>
-  <ion-card>
-      <ion-item>
-          <ion-label position="floating">Sequence</ion-label>
-          <ion-input  [(ngModel)]="currentImage.sequence"></ion-input>
-        </ion-item>
-         <ion-item [hidden]="!currentImage.filepath" >
-            <img width="150px" src="{{currentImage.filepath}}" />
-        </ion-item>
-    <ion-item>
-  
-      <ion-label>Select Image</ion-label>
-      <input
-        id="uploadBtn"
-        type="file"
-        class="upload"
-        (change)="addImages(currentImage, $event.target.files)"
-      />
-    </ion-item>
+  <ion-card style="height: 100%;">
+    <!-- <ion-item>
+      <ion-label position="floating">Sequence</ion-label>
+      <ion-input [(ngModel)]="currentImage.sequence"></ion-input>
+    </ion-item> -->
     <ion-item>
       <ion-label position="floating">Title</ion-label>
-      <ion-input  [(ngModel)]="currentImage.name"></ion-input>
+      <ion-input [(ngModel)]="currentImage.name"></ion-input>
+    </ion-item>
+    <ion-item [hidden]="!currentImage.filepath">
+      <img width="50px" src="{{currentImage.filepath}}" />
+    </ion-item>
+    <ion-item>
+      <ion-label>Select Image</ion-label>
+      <input id="uploadBtn" type="file" class="upload" (change)="addImages(currentImage, $event.target.files)" />
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Description</ion-label>
-      <ion-textarea [(ngModel)]="currentImage.description"></ion-textarea>
+      <ion-textarea autosize rows="15" [(ngModel)]="currentImage.description"></ion-textarea>
     </ion-item>
-     <!-- <img /> -->
-    <ion-row class="button-bar">
-        <ion-col>
-          <ion-button (click)="saveGallery()"> Save Gallery</ion-button> 
-        </ion-col>
-        <ion-col> <ion-button (click)="addNext()"> Save and Add </ion-button> </ion-col>
-      </ion-row>
   </ion-card>
 </ion-content>
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button>
-    <ion-icon name="add" (click)="presentModal()"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-<ion-footer> </ion-footer>
+<ion-footer>
+   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" ><ion-icon name="arrow-back"></ion-icon>Back</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button icon-only (click)="saveGallery()" >
+         <ion-icon name="save" ></ion-icon>  Publish
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  icon-only color="save" (click)="addNext()">
+        <ion-icon name="add"></ion-icon> Add Page
+      </ion-button>
+    </ion-buttons>
+</ion-toolbar>
+</ion-footer>

@@ -3,13 +3,12 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
 import { ImageData } from './ImageData';
-import { ImageService } from 'src/app/services/image.service';
-import { DatabaseService } from 'src/app/services/database.service';
 import { ModalController } from '@ionic/angular';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Gallery } from './Gallery';
 import { GalleryService } from 'src/app/services/gallery.service';
+import { CreateGalleryModalPage } from '../list/create-gallery-modal/create-gallery-modal.page';
 
 @Component({
   selector: 'app-addgallery',
@@ -71,7 +70,7 @@ export class AddgalleryPage implements OnInit {
 
   generateBlankGallery(gallery: Gallery) {
     gallery.images = [];
-   // gallery.createdby = TODO fetch user
+    // gallery.createdby = TODO fetch user
   }
 
   addImages(image: ImageData, event: FileList) {
@@ -120,7 +119,9 @@ export class AddgalleryPage implements OnInit {
   }
 
   saveGallery() {
-    this.imageService.update(this.gallery);
+    this.imageService.update(this.gallery).then(res => {
+      this.router.navigate(['/user/home']);
+    });
   }
 
   addNext() {
@@ -142,10 +143,28 @@ export class AddgalleryPage implements OnInit {
   ngOnInit() {
   }
 
-  homepage() {
-    //Blank function
+  goBack() {
+    if (this.currentIndex >= 1) {
+      this.currentIndex--;
+      this.currentImage = this.gallery.images[this.currentIndex];
+    } else {
+        this.openModal(this.gallery);
+    }
+    document.querySelector('img').src = this.currentImage.filepath;
   }
 
-  async presentModal() {
+  async openModal(gallery) {
+    const modal = await this.modalController.create({
+      component: CreateGalleryModalPage,
+      componentProps: {
+        gallery
+      }
+    });
+
+
+    modal.onDidDismiss().then((dataReturned) => {
+    });
+    return await modal.present();
   }
+
 }
