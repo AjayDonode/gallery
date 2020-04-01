@@ -7,6 +7,7 @@ import {
   FormControl
 } from "@angular/forms";
 import { AuthenticationService } from "./../../services/authentication.service";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,8 +21,9 @@ export class RegisterPage implements OnInit {
   validationsForm: FormGroup;
 
   constructor(private navCtrl: NavController,
-    private authService: AuthenticationService,
-    private formBuilder: FormBuilder) { }
+              private authService: AuthenticationService,
+              private router: Router,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.validationsForm = this.formBuilder.group({
@@ -44,15 +46,17 @@ export class RegisterPage implements OnInit {
     this.authService.registerUser(value).then((res) => {
       this.errorMessage = '';
       this.successMessage = 'Your account has been created. Please log in.';
+      this.router.navigate(['/profile']);
     },
       err => {
+        console.log(err);
         this.errorMessage = err.message;
         this.successMessage = '';
-    });
-}
+      });
+  }
 
-gotoLogin() {
-  this.navCtrl.navigateBack('');
-}
+  gotoLogin() {
+    this.navCtrl.navigateBack('');
+  }
 
 }

@@ -1,0 +1,25 @@
+
+
+// .card {
+//     margin: 0 auto;
+
+    // .header {
+    //     height: 200px; // 20vh;
+    
+
+ion-avatar { 
+    width: 75px;  
+    height: 75px;  
+    position: relative;
+    margin: 0 auto;
+    img {
+        display: block;
+        border-radius: 50%;
+        position: absolute;
+        bottom: calc(-1*(80px + 4px)); // -42px;
+        border: 2px solid #cccccc;
+        background-color: #fff;
+    }
+}
+// }
+// }

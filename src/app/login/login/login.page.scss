@@ -1,0 +1,25 @@
+$white-color: #fff;
+$height100: 100%;
+
+ion-card{
+    // transform: translate(-50%, -50%);
+   margin-top: 10%;
+}
+
+ion-col {
+    border: 1px solid #cccccc;
+    background: $white-color;
+}
+
+.login-logo {
+    border-bottom: 1px solid #cccccc;
+}
+
+@media (min-width: 240px) and (max-width: 768px) {
+    ion-grid {
+        background: $white-color;
+    }
+    // ion-col {
+    //     border: none;
+    // }
+}

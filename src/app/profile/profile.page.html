@@ -1,0 +1,68 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons slot="end"><ion-button >Skip</ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" src="../../assets/checkmark-filled.svg"></ion-icon>
+       </ion-button>
+    </ion-buttons> -->
+    <ion-buttons slot="end"><ion-button (click)="doSkip()" >Skip  <ion-icon slot="end" name="arrow-forward"></ion-icon> </ion-button></ion-buttons>
+    <!-- <ion-buttons slot="start">
+      <ion-button color="light">
+        <ion-icon slot="start" name="ios-arrow-back"></ion-icon>
+        Favorites
+      </ion-button>
+    </ion-buttons> -->
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" slot="fixed" >
+  <form [formGroup]="validationsForm" (ngSubmit)="save(validationsForm.value)">
+    <ion-card  >
+      <div class="header" [style.backgroundImage]="'url(' + profBannerImage + ')'">
+        <ion-avatar>
+          <img src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg" alt="">
+        </ion-avatar>
+      </div>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+          <ion-label class="displayName">Ajay Donode</ion-label>
+          <ion-label class="location">Tracy</ion-label>
+        </div>
+      </div>
+      <div class="ion-padding">
+        <ion-item>
+          <ion-input name="name" type="text" placeholder="DisplayName" formControlName="displayName" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input name="email" type="email" placeholder="your@email.com" formControlName="email" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="phone" placeholder="Phone" formControlName="phoneNumber" required></ion-input>
+        </ion-item>
+        <ion-buttons slot="end">
+          <ion-button >Cancel</ion-button> 
+          <ion-button type="submit" [disabled]="validationsForm.invalid"  expand="block">Save</ion-button>
+        </ion-buttons>
+      </div>
+      
+    </ion-card>
+    </form>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    
+</ion-toolbar>
+</ion-footer>

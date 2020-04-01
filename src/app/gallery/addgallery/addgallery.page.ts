@@ -29,7 +29,6 @@ export class AddgalleryPage implements OnInit {
         } else {
           this.generateBlankGallery(this.gallery);
         }
-        console.log("Printing Gallery Object" + this.gallery.id);
       }
     });
   }

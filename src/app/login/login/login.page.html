@@ -1,9 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>profile</ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
 <ion-content  class="ion-padding">
   <form [formGroup]="validationsForm" (ngSubmit)="login(validationsForm.value)">
-    <ion-card>
+    <!-- <ion-card size-md="6" size-lg="5" size-xs="12"> -->
     <ion-grid>
-      <ion-row color="primary" class="ion-justify-content-center">
+      <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center class="login-logo">
+            <h1>-: Granth :-</h1>
+          </div>
           <div text-center>
             <h3>Login</h3>
           </div>
@@ -16,7 +25,7 @@
             </ion-item>
           </div>
           <div class="ion-padding">
-            <ion-button size="large" type="submit" [disabled]="validationsForm.invalid" expand="block">Login</ion-button>
+            <ion-button type="submit" [disabled]="validationsForm.invalid" expand="block">Login</ion-button>
           </div>
           <label class="error-message">{{errorMessage}}</label>
           <div text-center>
@@ -25,6 +34,7 @@
           </div>
         </ion-col>
       </ion-row>
-    </ion-grid></ion-card>
+    </ion-grid>
+  <!-- </ion-card> -->
   </form>
 </ion-content>

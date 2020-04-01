@@ -13,6 +13,7 @@ import { User } from 'firebase';
 })
 export class AppComponent {
 user: User = null;
+errorMessage = '';
 
   constructor(
     private navCtrl: NavController,
@@ -32,15 +33,16 @@ user: User = null;
     });
   }
 
+  profile() {this.navCtrl.navigateForward('/profile');}
+
 logout() {
-  console.log('Log Out is called ');
   this.authService.logoutUser().then(
     res => {
       this.navCtrl.navigateForward('/login');
       this.menuController.enable(false);
     },
     err => {
-      // this.errorMessage = err.message;
+       this.errorMessage = err.message;
     }
   );
 }

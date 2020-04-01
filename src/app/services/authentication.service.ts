@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthenticationService {
   authState = new BehaviorSubject(false);
   userData: any = null;
-  constructor(private router: Router ) {
+  constructor(private router: Router, private userService : UserService) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.userData = user; // Setting up user data in userData var
@@ -26,9 +27,18 @@ export class AuthenticationService {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
         .then(
-          res => resolve(res),
+          res => {
+            this.updateProfile(value);
+            resolve(res);
+          },
           err => reject(err));
     });
+  }
+
+
+  updateProfile(value) {
+    console.log(this.userData);
+    this.userService.saveUser(this.userData.uid, value);
   }
 
   loginUser(value) {
@@ -53,12 +63,8 @@ export class AuthenticationService {
 
   getCurrentUser() {
     if (this.userData == null) {
-        this.userData = JSON.parse(localStorage.getItem('user'));
-        if (this.userData == null) {
-          // throw Error('No User found');
-          this.router.navigate(['login']);
-        }
-      }
+      this.userData = JSON.parse(localStorage.getItem('user'));
+    }
     return this.userData;
   }
 

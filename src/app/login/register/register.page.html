@@ -6,10 +6,14 @@
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
             <h3>Create New Account!</h3>
+            <div>
+              <ion-label color="danger">{{errorMessage}}</ion-label>
+            <ion-label class="success-message">{{successMessage}}</ion-label>
+            </div>
           </div>
           <div class="ion-padding">
             <ion-item>
-              <ion-input name="name" type="text" placeholder="Username" formControlName="name" required></ion-input>
+              <ion-input name="name" type="text" placeholder="DisplayName" formControlName="name" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="email" type="email" placeholder="your@email.com" formControlName="email" required></ion-input>
@@ -22,9 +26,7 @@
             </ion-item> -->
           </div>
           <div class="ion-padding">
-            <ion-button size="large" type="submit" [disabled]="validationsForm.invalid" expand="block">Register</ion-button>
-            <label class="error-message">{{errorMessage}}</label>
-    <label class="success-message">{{successMessage}}</label>
+            <ion-button type="submit" [disabled]="validationsForm.invalid" expand="block">Register</ion-button>
             <br>
             <div text-center>
               <label>Already have an account? </label>

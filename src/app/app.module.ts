@@ -31,7 +31,7 @@ firebase.initializeApp(environment.firebase);
     AppRoutingModule,
     CreateGalleryPageModule,
     ComponentsModule,
-    AngularFireModule.initializeApp(environment.firebase, 'My-Gallery'), // imports firebase/app needed for everything
+    AngularFireModule.initializeApp(environment.firebase, 'Granth'), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AngularFireAuthModule // import for Auth and users storage

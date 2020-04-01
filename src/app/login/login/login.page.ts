@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import {
   FormGroup,
   FormBuilder,
@@ -44,7 +43,7 @@ export class LoginPage implements OnInit {
 
   handleExistingSession() {
     const isLoggedIn = this.authService.isLoggedIn();
-    console.log('LoginPage User ' + isLoggedIn);
+    
     if (isLoggedIn) {
       this.router.navigate(['/user/home']);
     }
