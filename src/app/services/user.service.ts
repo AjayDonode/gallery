@@ -24,12 +24,6 @@ export class UserService {
   }
 
   saveUser(uid: any, value: any) {
-    // let user: User = {
-    //   email: value.email,
-    //   displayName: value.displayName,
-    //   bannerURL: value.bannerURL,
-    //   photoURL: value.photoURL
-    // };
     this.userCollection.doc(uid).set(value);
   }
 }

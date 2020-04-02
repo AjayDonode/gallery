@@ -29,18 +29,20 @@
 
 <ion-content fullscreen="true" slot="fixed" >
   <form [formGroup]="validationsForm" (ngSubmit)="save(validationsForm.value)">
-    <ion-card  >
+    <ion-card>
       <div class="header" [style.backgroundImage]="'url(' + profBannerImage + ')'">
         <ion-avatar>
           <img src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg" alt="">
+          <div class="user-meta ion-text-center">
+            <ion-label class="displayName">{{user.displayName}}</ion-label>
+            <ion-label class="location">{{user.location}}</ion-label>
+          </div>
         </ion-avatar>
       </div>
-      <div class="card-body">
-        <div class="user-meta ion-text-center">
-          <ion-label class="displayName">Ajay Donode</ion-label>
-          <ion-label class="location">Tracy</ion-label>
-        </div>
-      </div>
+    </ion-card>
+      <!-- <div class="card-body">
+        
+      </div> -->
       <div class="ion-padding">
         <ion-item>
           <ion-input name="name" type="text" placeholder="DisplayName" formControlName="displayName" required></ion-input>
@@ -51,18 +53,18 @@
         <ion-item>
           <ion-input type="phone" placeholder="Phone" formControlName="phoneNumber" required></ion-input>
         </ion-item>
-        <ion-buttons slot="end">
-          <ion-button >Cancel</ion-button> 
-          <ion-button type="submit" [disabled]="validationsForm.invalid"  expand="block">Save</ion-button>
-        </ion-buttons>
+  
       </div>
       
-    </ion-card>
+    
     </form>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    
+    <ion-buttons slot="end">
+      <ion-button >Cancel</ion-button> 
+      <ion-button  [disabled]="validationsForm.invalid"  (click)="save(validationsForm.value)" expand="block">Save</ion-button>
+    </ion-buttons>
 </ion-toolbar>
 </ion-footer>

@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 export class AuthenticationService {
   authState = new BehaviorSubject(false);
   userData: any = null;
-  constructor(private router: Router, private userService : UserService) {
+  constructor(private router: Router, private userService: UserService) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.userData = user; // Setting up user data in userData var
@@ -26,11 +26,7 @@ export class AuthenticationService {
   registerUser(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-        .then(
-          res => {
-            this.updateProfile(value);
-            resolve(res);
-          },
+        .then(res => resolve(res),
           err => reject(err));
     });
   }

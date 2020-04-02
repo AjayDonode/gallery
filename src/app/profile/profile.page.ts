@@ -26,11 +26,8 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.user = this.authService.getCurrentUser();
-
     this.profBannerImage = "/assets/shapes.svg";
-
     this.validationsForm = this.formBuilder.group({
       displayName: new FormControl(
         this.user.displayName,
@@ -48,7 +45,6 @@ export class ProfilePage implements OnInit {
   }
 
   save(value) {
-    //this.user  = this.authService.getCurrentUser();
     this.authService.updateProfile(value);
     // .then((res) => {
     //   this.errorMessage = '';
