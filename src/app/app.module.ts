@@ -19,6 +19,7 @@ import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import * as firebase from 'firebase';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
+import { EditProfilePageModule } from './profile/edit-profile/edit-profile.module';
 
 firebase.initializeApp(environment.firebase);
 
@@ -30,6 +31,7 @@ firebase.initializeApp(environment.firebase);
     IonicModule.forRoot(),
     AppRoutingModule,
     CreateGalleryPageModule,
+    EditProfilePageModule,
     ComponentsModule,
     AngularFireModule.initializeApp(environment.firebase, 'Granth'), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

@@ -33,7 +33,10 @@ errorMessage = '';
     });
   }
 
-  profile() {this.navCtrl.navigateForward('/profile');}
+  profile() {
+    this.navCtrl.navigateForward('/profile');
+  this.menuController.enable(false);
+}
 
 logout() {
   this.authService.logoutUser().then(

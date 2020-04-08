@@ -26,10 +26,11 @@ export class GalleryService {
     );
   }
 
-  getUserGalleryList(user: any) {
+  getUserGalleryList() {
+    const uid = this.authenticationService.getCurrentUserId();
     this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
       // Compose a query using multiple .where() methods
-      return ref.where('createdby', '==', user.uid);
+      return ref.where('createdby', '==', uid);
     });
     this.gallerylist = this.galleryCollection.valueChanges();
     return this.gallerylist;

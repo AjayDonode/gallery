@@ -1,0 +1,72 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+    <ion-buttons slot="end"><ion-button >Skip</ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content> -->
+<ion-header translucent no-border>
+  <ion-toolbar>
+    <ion-title align-self-center >Profile</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon> Back
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="save(userProfileForm.value)">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header [style.backgroundImage]="'url(' + user.bannerURL + ')'">
+      <ion-avatar align-self-center>
+        <img src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg"
+          alt="">
+      </ion-avatar>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="card-body">
+        <div class="user-meta ion-text-center">
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-card style="height: 100%;">
+  <form [formGroup]="userProfileForm" (ngSubmit)= "save(userProfileForm.value)">
+    <div class="ion-padding">
+      <ion-item>
+        <ion-label color="primary" position="floating">DisplayName</ion-label>
+        <ion-input name="name" type="text"  formControlName="displayName" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Info</ion-label>
+        <ion-textarea  placeholder="Write something about your galllery" formControlName="info" ></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Email</ion-label>
+        <ion-input name="email" type="email"  formControlName="email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Phone</ion-label>
+        <ion-input type="phone" placeholder="Phone" formControlName="phoneNumber" required></ion-input>
+      </ion-item>
+     
+      <ion-item formGroupName="address">
+        <ion-label position="stacked">Address</ion-label>
+            <ion-input placeholder="Street" formControlName="street"></ion-input>
+            <ion-input placeholder="City" formControlName="city"></ion-input>
+            <ion-input placeholder="State" formControlName="state"></ion-input>
+            <ion-input placeholder="Country" formControlName="country"></ion-input>
+            <ion-input placeholder="Zip Code" formControlName="zip"></ion-input>
+      </ion-item>
+    </div>
+  </form>
+</ion-card>
+</ion-content>

@@ -1,70 +1,56 @@
-<!-- <ion-header>
+
+<ion-header translucent no-border>
   <ion-toolbar>
     <ion-title>Profile</ion-title>
-    <ion-buttons slot="end"><ion-button >Skip</ion-button></ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon> Back
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <!-- <ion-button (click)="doSkip()">Skip<ion-icon slot="end" name="arrow-forward"></ion-icon> </ion-button> -->
+      <ion-button (click)="doEdit()">Edit</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-</ion-content> -->
-<ion-header translucent no-border>
-  <ion-toolbar>
-    <ion-title>Profile</ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" src="../../assets/checkmark-filled.svg"></ion-icon>
-       </ion-button>
-    </ion-buttons> -->
-    <ion-buttons slot="end"><ion-button (click)="doSkip()" >Skip  <ion-icon slot="end" name="arrow-forward"></ion-icon> </ion-button></ion-buttons>
-    <!-- <ion-buttons slot="start">
-      <ion-button color="light">
-        <ion-icon slot="start" name="ios-arrow-back"></ion-icon>
-        Favorites
-      </ion-button>
-    </ion-buttons> -->
-  
-  </ion-toolbar>
-</ion-header>
-
-<ion-content fullscreen="true" slot="fixed" >
-  <form [formGroup]="validationsForm" (ngSubmit)="save(validationsForm.value)">
     <ion-card>
-      <div class="header" [style.backgroundImage]="'url(' + profBannerImage + ')'">
-        <ion-avatar>
+      <ion-card-header [style.backgroundImage]="'url(' + profBannerImage + ')'">
+        <ion-avatar align-self-center>
           <img src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg" alt="">
-          <div class="user-meta ion-text-center">
-            <ion-label class="displayName">{{user.displayName}}</ion-label>
-            <ion-label class="location">{{user.location}}</ion-label>
-          </div>
         </ion-avatar>
-      </div>
+        <!-- <div text-center>
+          <h5>{{user?.displayName}}</h5>
+          <h6>{{user?.location}}</h6>
+        </div> -->
+        <hr>
+      </ion-card-header>
+      <ion-card-content text-center>
+        <div class="card-body">
+          <h6> {{user?.displayName}}</h6>
+          <h6> @ {{user?.email}}</h6>
+    </div>
+      </ion-card-content>
     </ion-card>
-      <!-- <div class="card-body">
-        
-      </div> -->
-      <div class="ion-padding">
-        <ion-item>
-          <ion-input name="name" type="text" placeholder="DisplayName" formControlName="displayName" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input name="email" type="email" placeholder="your@email.com" formControlName="email" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input type="phone" placeholder="Phone" formControlName="phoneNumber" required></ion-input>
-        </ion-item>
-  
-      </div>
+    <ion-card style="height: 100%;">
+      <ion-card-header>{{user?.displayName}}</ion-card-header>
+      <ion-card-content>
+        <h6> {{user?.email}}</h6>
+      <hr>
+      <h6>  {{user?.phoneNumber}}</h6>
+      <div *ngIf=user?.address> 
+        <h6>{{user?.address.street}} </h6>
+        <h6>{{user?.address.city}}  {{user?.address.state}} </h6>
+        <h6>{{user?.address.country}}  {{user?.address.zip}} </h6>
+</div>
+      </ion-card-content>
       
+    </ion-card>
     
-    </form>
-</ion-content>
+  </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons slot="end">
-      <ion-button >Cancel</ion-button> 
-      <ion-button  [disabled]="validationsForm.invalid"  (click)="save(validationsForm.value)" expand="block">Save</ion-button>
-    </ion-buttons>
-</ion-toolbar>
+ </ion-toolbar>
 </ion-footer>

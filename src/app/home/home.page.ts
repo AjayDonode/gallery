@@ -3,6 +3,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { MenuController } from '@ionic/angular';
 import { GalleryService } from '../services/gallery.service';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -13,16 +14,16 @@ export class HomePage implements OnInit {
   user = null;
   username = null;
   gallerylist: any;
-  constructor(private authService: AuthenticationService,
+  constructor(private userService: UserService,
               private menuController: MenuController,
               private router: Router,
               private galleryService: GalleryService) { }
   ngOnInit(): void {
     // Fetching current logged in User
-    this.user = this.authService.getCurrentUser();
+    this.user = this.userService.getUser();
     this.username = this.user.displayName;
 
-    this.galleryService.getUserGalleryList(this.user).subscribe(res => {
+    this.galleryService.getUserGalleryList().subscribe(res => {
       this.gallerylist = res;
     });
   }

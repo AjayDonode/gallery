@@ -1,63 +1,63 @@
-import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  FormBuilder,
-  FormControl,
-  Validators
-} from "@angular/forms";
-import { AuthenticationService } from "../services/authentication.service";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { ModalController } from '@ionic/angular';
+import { EditProfilePage } from './edit-profile/edit-profile.page';
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.page.html",
-  styleUrls: ["./profile.page.scss"]
+  selector: 'app-profile',
+  templateUrl: './profile.page.html',
+  styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
   profBannerImage: any;
-  validationsForm: FormGroup;
-  user: any;
+  // validationsForm: FormGroup;
+  user: any = {};
   errorMessage = '';
   successMessage = '';
   constructor(
-    private authService: AuthenticationService,
-    private router: Router,
-    private formBuilder: FormBuilder
+    private userService: UserService,
+    private modalController: ModalController,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.user = this.authService.getCurrentUser();
-    this.profBannerImage = "/assets/shapes.svg";
-    this.validationsForm = this.formBuilder.group({
-      displayName: new FormControl(
-        this.user.displayName,
-        Validators.compose([Validators.required, Validators.minLength(5)])
-      ),
-      email: new FormControl(
-        this.user.email,
-        Validators.compose([
-          Validators.required,
-          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
-        ])
-      ),
-      phoneNumber: new FormControl(this.user.phoneNumber, Validators.compose([Validators.minLength(5)]))
-    });
+    this.loadUser();
+    this.profBannerImage = '/assets/shapes.svg';
   }
 
   save(value) {
-    this.authService.updateProfile(value);
-    // .then((res) => {
-    //   this.errorMessage = '';
-    //   this.successMessage = 'Your account has been created. Please log in.';
-    //   this.router.navigate(['/profile']);
-    // },
-    //   err => {
-    //     console.log(err);
-    //     this.errorMessage = err.message;
-    //     this.successMessage = '';
-    //   });
+    this.userService.updateUser(value).then((res) => {
+      this.errorMessage = '';
+      this.successMessage = 'Your account has been created. Please log in.';
+      this.router.navigate(['/profile']);
+    },
+      err => {
+        console.log(err);
+        this.errorMessage = err.message;
+        this.successMessage = '';
+      });
   }
 
+  async loadUser() {
+    this.userService.getUser().subscribe(res => {
+      this.user = res;
+      // this.setProfileForm();
+      // this.loader.loadingDismiss();
+      // this.loaded = true;
+    });
+  }
+
+  async doEdit() {
+    const modal = await this.modalController.create({
+      component: EditProfilePage,
+      componentProps: { user: this.user }
+      });
+    return await modal.present();
+  }
+  back() {
+    this.doSkip();
+  }
   doSkip() {
     this.router.navigate(['/user/home']);
   }
