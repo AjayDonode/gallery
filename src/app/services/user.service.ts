@@ -4,12 +4,12 @@ import { User } from '../modals/User';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
+import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  
   private userCollection: AngularFirestoreCollection<User>;
   private users: Observable<User[]>;
   constructor(private database: AngularFirestore, private authService: AuthenticationService) {
@@ -20,17 +20,21 @@ export class UserService {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return { id, ...data };
-        })
+        });
       })
-    )
+    );
   }
 
   saveUser(uid: any, value: User) {
-   return this.userCollection.doc(uid).set(value);
+    return this.userCollection.doc(uid).set(value);
   }
 
   updateUser(value: User) {
     return this.userCollection.doc(this.authService.getCurrentUserId()).update(value);
+  }
+
+  logOut() {
+    this.authService.logoutUser();
   }
 
   getUser(): any {

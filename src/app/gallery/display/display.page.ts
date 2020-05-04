@@ -38,19 +38,21 @@ export class DisplayPage implements OnInit {
     this.imageDBService.getGallery(this.galleryId).subscribe(res => {
       this.gallery = res;
       this.loader.loadingDismiss();
-      this.shareLink(this.gallery);
+      // this.shareLink(this.gallery);
       this.loaded = true;
     });
   }
 
   shareLink(gallery: Gallery) {
     this.sharing.addTwitterCard(gallery.name, gallery.description, gallery.images[0].filepath);
+    //REFer thislink for implementation 
+    //https://samvloeberghs.be/posts/better-sharing-on-social-media-platforms-with-angular-universal
   }
 
   setPageView() {
       this.pageViewService.get(this.galleryId).subscribe(res => {
-      this.visitor = res;
-      this.visitor.visitcount++;
+      // this.visitor = res;
+      // this.visitor.visitcount++;
     });
   }
 

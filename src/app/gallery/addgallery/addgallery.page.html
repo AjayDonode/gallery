@@ -31,7 +31,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Select Image</ion-label>
-      <input id="uploadBtn" type="file" class="upload" (change)="addImages(currentImage, $event.target.files)" />
+      <input id="uploadBtn" type="file" accept="image/*"  class="upload" (change)="addImages(currentImage, $event.target.files)" />
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Description</ion-label>

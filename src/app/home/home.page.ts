@@ -4,6 +4,7 @@ import { MenuController } from '@ionic/angular';
 import { GalleryService } from '../services/gallery.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { User } from '../modals/User';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +12,16 @@ import { UserService } from '../services/user.service';
   styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
-  user = null;
-  username = null;
-  gallerylist: any;
+  user: User = {displayName: null,
+     email: null};
+  gallerylist: any[] = [];
   constructor(private userService: UserService,
               private menuController: MenuController,
               private router: Router,
               private galleryService: GalleryService) { }
   ngOnInit(): void {
     // Fetching current logged in User
-    this.user = this.userService.getUser();
-    this.username = this.user.displayName;
-
+    this.userService.getUser().subscribe(res=> {this.user  = res; });
     this.galleryService.getUserGalleryList().subscribe(res => {
       this.gallerylist = res;
     });

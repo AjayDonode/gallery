@@ -1,12 +1,12 @@
 import { Component, OnInit, EmbeddedViewRef } from '@angular/core';
-import { NavController } from "@ionic/angular";
+import { NavController } from '@ionic/angular';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl
-} from "@angular/forms";
-import { AuthenticationService } from "./../../services/authentication.service";
+} from '@angular/forms';
+import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/modals/User';

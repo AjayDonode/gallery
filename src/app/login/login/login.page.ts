@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthenticationService } from './../../services/authentication.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,12 +20,13 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
+    private userService: UserService,
     private formBuilder: FormBuilder
-  ) { }
+  ) { this.handleExistingSession(); }
 
   ngOnInit() {
 
-    this.handleExistingSession();
+    
 
     this.validationsForm = this.formBuilder.group({
       email: new FormControl(
@@ -42,10 +44,12 @@ export class LoginPage implements OnInit {
   }
 
   handleExistingSession() {
+    console.log(this.authService.isAuthenticated());
     const isLoggedIn = this.authService.isLoggedIn();
-    
     if (isLoggedIn) {
-      this.router.navigate(['/user/home']);
+      this.userService.getUser().subscribe(res => {
+        this.router.navigate(['/user/home']);
+      });
     }
   }
 

@@ -26,7 +26,7 @@ const routes: Routes = [
       import('./gallery/addgallery/addgallery.module').then(m => m.AddgalleryPageModule)
   },
   {
-    path: 'list',
+    path: 'user/list',
     loadChildren: () =>
       import('./gallery/list/list.module').then(m => m.ListPageModule),
       canActivate: [AuthGuard]

@@ -1,11 +1,20 @@
-.welcome-card img {
+.welcome-card 
+{  height: 95%;
+img {
+
   max-height: 35vh;
   overflow: hidden;
+}
+}
+
+.sharebox{
+  border-top: thin solid #cccccc;
+  text-align: left;
 }
 
 .profile-card {
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   img{
     width: 50px;
     height: 50px;

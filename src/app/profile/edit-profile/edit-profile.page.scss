@@ -1,8 +1,6 @@
 
 
-ion-card {
-    margin: 0 auto;
-    height: 175px;
+
 ion-avatar { 
     width: 75px;  
     height: 75px;  
@@ -11,10 +9,41 @@ ion-avatar {
     img {
         display: block;
         border-radius: 50%;
-        position: absolute;
-        bottom: calc(-1*(80px + 4px)); // -42px;
+        position: inherit;
+        //bottom: calc(-1*(80px + 4px)); // -42px;
         border: 2px solid #cccccc;
         background-color: #fff;
     }
 }
+
+// .ion-avatar{
+//     position: absolute;
+//     right: -5px;
+//     bottom: -5px;
+//     height: 40px;
+//     width: 40px;
+//     border-radius: 50%;
+//     border: gray 1px solid;
+//     cursor: pointer;
+//     color: white;
+//   }
+
+.upload{
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .uploadButton {
+    // position: absolute;
+    // right: -5px;
+    // bottom: -5px;
+    // height: 40px;
+    // width: 40px;
+    // // border-radius: 50%;
+    // // border: gray 1px solid;
+    cursor: pointer;
+    color:white}
+
+form {
+width: 100%;
 }

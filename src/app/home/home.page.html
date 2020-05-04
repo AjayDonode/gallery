@@ -1,43 +1,61 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      My Portal
+      My Gallery
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)=openEnd()>
-        <ion-icon  name="settings"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-button (click)="openEnd()">
+        <ion-icon name="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <img src="/assets/shapes.svg" alt="" />
-      <!-- <ion-card-header>
+  <ion-card class="welcome-card">
+    <img src="{{user.bannerURL}}" alt="" />
+    <!-- <ion-card-header>
         <ion-card-subtitle>Enjoy</ion-card-subtitle>
         <ion-card-title>Welcome {{user.email}}</ion-card-title>
       </ion-card-header> -->
-      <div class="profile-card">
-        <ion-row>
-          <img src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg"/>
-              <div *ngIf="user.displayName; else email" >
-                <h4>
-                  &nbsp; {{user.displayName}}
-                </h4>
-              </div>
-              <ng-template #email>
-                <h4>
-                  &nbsp; {{user.email}}
-                </h4>
-              </ng-template>
-            </ion-row>
+    <div class="profile-card">
+      <ion-row >
+        <img src="{{user.photoURL}}" />
+        <div *ngIf="user.displayName!=undefined; else email">
+          <h4>
+            &nbsp; {{user?.displayName}}
+          </h4>
         </div>
-      <ion-card-content>
-        <p>{{user.info}}</p>
-      </ion-card-content>
-      <app-grid-list [data] ='gallerylist' [label] = "'My Pages'" (itemClicked)="doClick($event)" > </app-grid-list>
-      <a [routerLink]="['/list']" routerLinkActive="router-link-active" > Edit</a>
-    </ion-card>
-    
+        <ng-template #email>
+          <h4>
+            &nbsp; {{user?.email}}
+          </h4>
+        </ng-template>
+      </ion-row>
+      <ion-row>
+        <p>&nbsp; {{user?.info}}</p>
+      </ion-row>
+      <ion-row class="sharebox">
+        <ion-col>
+          <a [routerLink]="['/user/list']" routerLinkActive="router-link-active"
+            >{{gallerylist.length}} Gallery</a
+          >
+        </ion-col>
+        <ion-col>
+          Follow
+        </ion-col>
+        <ion-col>
+          Following
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-card-content style="display: contents; height: 100%;">
+      <app-card-list
+        [data]="gallerylist"
+        [label]="'My Pages'"
+        (itemClicked)="doClick($event)"
+     >
+      </app-card-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

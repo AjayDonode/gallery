@@ -10,7 +10,7 @@
 </ion-content> -->
 <ion-header translucent no-border>
   <ion-toolbar>
-    <ion-title align-self-center >Profile</ion-title>
+    <ion-title class="ion-align-self-center" >Edit Profile</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="closeModal()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon> Back
@@ -18,29 +18,37 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="save(userProfileForm.value)">Save</ion-button>
-    </ion-buttons>
+    </ion-buttons> 
   </ion-toolbar>
 </ion-header>
-
+<div *ngIf="percentage | async as pct">
+  <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+</div>
+<div *ngIf="snapshot | async as snap">
+  <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
+</div>
 <ion-content>
 
-  <ion-card>
-    <ion-card-header [style.backgroundImage]="'url(' + user.bannerURL + ')'">
-      <ion-avatar align-self-center>
-        <img src="https://pbs.twimg.com/profile_images/378800000107983641/e07f88f9eee6a64ab1cc0c69dd1ff314_400x400.jpeg"
-          alt="">
+  <ion-grid>
+    <ion-row class="ion-align-self-center" text-center id="banner-row">
+    <ion-col [style.backgroundImage]="'url(' + user.bannerURL + ')'">
+      <ion-avatar class="ion-align-self-center">
+        <img src="{{user.photoURL}}" formControlName="photoURL" alt="">
       </ion-avatar>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="card-body">
-        <div class="user-meta ion-text-center">
-        </div>
-      </div>
-    </ion-card-content>
-  </ion-card>
-  <ion-card style="height: 100%;">
+    <label for="fileInput" icon-only ion-button class="uploadButton" float-right >
+        <ion-icon name="create"></ion-icon>
+    </label>
+    <!-- <h6>Based in </h6>
+    <h6>New Country, Dont exist</h6> -->
+    <label for="bannerInput" icon-only ion-button class="uploadButton">
+      <ion-icon name="create"></ion-icon>
+   </label>
+    </ion-col>
+  
+  </ion-row>
+  <ion-row>
   <form [formGroup]="userProfileForm" (ngSubmit)= "save(userProfileForm.value)">
-    <div class="ion-padding">
+    <div >
       <ion-item>
         <ion-label color="primary" position="floating">DisplayName</ion-label>
         <ion-input name="name" type="text"  formControlName="displayName" required></ion-input>
@@ -57,9 +65,10 @@
         <ion-label color="primary" position="floating">Phone</ion-label>
         <ion-input type="phone" placeholder="Phone" formControlName="phoneNumber" required></ion-input>
       </ion-item>
-     
+      <input type="file" accept="image/*" class="upload" (change)="uploadPhoto($event.target.files)" formControlName="photoUrl" id="fileInput"/>
+      <input type="file" accept="image/*" class="upload" (change)="uploadBanner($event.target.files)" formControlName="bannerUrl" id="bannerInput"/>
       <ion-item formGroupName="address">
-        <ion-label position="stacked">Address</ion-label>
+        <ion-label color="primary" position="stacked">Address</ion-label>
             <ion-input placeholder="Street" formControlName="street"></ion-input>
             <ion-input placeholder="City" formControlName="city"></ion-input>
             <ion-input placeholder="State" formControlName="state"></ion-input>
@@ -68,5 +77,6 @@
       </ion-item>
     </div>
   </form>
-</ion-card>
+  </ion-row>
+</ion-grid>
 </ion-content>

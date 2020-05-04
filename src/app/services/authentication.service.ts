@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 export class AuthenticationService {
   authState = new BehaviorSubject(false);
   userData: any = null;
-  constructor(private router: Router) {
+  constructor() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.userData = user; // Setting up user data in userData var
@@ -48,8 +48,6 @@ export class AuthenticationService {
   }
 
   logoutUser(): Promise<void> {
-    localStorage.removeItem('user');
-    this.userData = null;
     return firebase.auth().signOut();
   }
 

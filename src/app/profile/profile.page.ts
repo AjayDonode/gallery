@@ -22,7 +22,7 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadUser();
+    this.userService.getUser().subscribe(res=> {this.user  = res; });
     this.profBannerImage = '/assets/shapes.svg';
   }
 
@@ -37,15 +37,6 @@ export class ProfilePage implements OnInit {
         this.errorMessage = err.message;
         this.successMessage = '';
       });
-  }
-
-  async loadUser() {
-    this.userService.getUser().subscribe(res => {
-      this.user = res;
-      // this.setProfileForm();
-      // this.loader.loadingDismiss();
-      // this.loaded = true;
-    });
   }
 
   async doEdit() {
