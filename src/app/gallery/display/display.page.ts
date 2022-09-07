@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GalleryService } from 'src/app/services/gallery.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Gallery } from '../addgallery/Gallery';
 import { SeoService } from 'src/app/services/seo.service';
 import { PageCounterService } from 'src/app/services/pagecounter.service';
 import { PageVisitorTrack } from 'src/app/modals/PageVisitorTrack';
@@ -21,8 +20,10 @@ export class DisplayPage implements OnInit {
   galleryId: any;
   visitor: PageVisitorTrack;
 
-  constructor(private arouter: ActivatedRoute, private imageDBService: GalleryService,
-              private sharing: SeoService , private pageViewService: PageCounterService,
+  constructor(private arouter: ActivatedRoute, 
+              private imageDBService: GalleryService,
+              private sharing: SeoService , 
+              private pageViewService: PageCounterService,
               private loader: LoaderService) { }
   ngOnInit() {
     this.loader.loadingPresent('Loading', 1000);
@@ -43,11 +44,20 @@ export class DisplayPage implements OnInit {
     });
   }
 
-  shareLink(gallery: Gallery) {
-    this.sharing.addTwitterCard(gallery.name, gallery.description, gallery.images[0].filepath);
-    //REFer thislink for implementation 
-    //https://samvloeberghs.be/posts/better-sharing-on-social-media-platforms-with-angular-universal
-  }
+//   shareLink(gallery: Gallery) {
+//     this.sharing.addTwitterCard(gallery.name, gallery.description, gallery.images[0].filepath);
+//     //REFer thislink for implementation
+//     //https://samvloeberghs.be/posts/better-sharing-on-social-media-platforms-with-angular-universal
+//   }
+
+  shareIt(shareOn : string) {
+            //  var data = { message : 'hello world' };
+            // var modalPage = this.modalController.create('ModalPage',data);
+            // modalPage.present();
+            console.log("Share On "+shareOn)
+           
+       }
+
 
   setPageView() {
       this.pageViewService.get(this.galleryId).subscribe(res => {
@@ -55,8 +65,4 @@ export class DisplayPage implements OnInit {
       // this.visitor.visitcount++;
     });
   }
-
-  // ionViewDidLoad() {
-  //   // this.pageViewService.update(this.visitor);
-  // }
 }

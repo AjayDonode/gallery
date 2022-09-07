@@ -37,7 +37,7 @@ const routes: Routes = [
   // { path: 'list', loadChildren: './gallery/list/list.module#ListPageModule' },
   // { path: 'register', loadChildren: './login/register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './login/login/login.module#LoginPageModule' },
-  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' }
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' } //,
 ];
 @NgModule({
   imports: [
