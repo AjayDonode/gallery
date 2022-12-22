@@ -12,8 +12,7 @@ import { User } from '../modals/User';
   styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
-  user: User = {displayName: null,
-     email: null};
+  user: User = {displayName: null, email: null};
   gallerylist: any[] = [];
   constructor(private userService: UserService,
               private menuController: MenuController,

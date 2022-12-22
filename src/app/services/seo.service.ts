@@ -4,19 +4,29 @@ import { Meta, Title } from '@angular/platform-browser';
   providedIn: 'root'
 })
 export class SeoService {
-
-  constructor(private title: Title, private meta: Meta) {}
+  _url :any; 
+  constructor(private title: Title, private metaService: Meta) {}
 
   addTwitterCard(title, description, img) {
     // Set HTML Document Title
+    this._url  =  window.location;
     this.title.setTitle(title);
+    console.log("Name {} , description {} image {}", title, description , img)
+    this.metaService.addTags([
+      { name: 'keywords',content: title},
+      { property: 'og:type', content: "article" },
+      { property: 'og:title', content: title },
+      { property: 'og:description', content: description },
+      { property: 'og:url', content: this._url },
+      { property: 'og:image', content: img},
+      { name: 'twitter:card', content: "summary" },
+      { name: 'twitter:title', content: title },
+      { name: 'twitter:description', content: description },
+      { name: 'twitter:site', content: "@Bing Bong" },
+      { name: 'twitter:creator', content: "@Bing Bong" },
+      { name: 'twitter:image', content: img},
+      { name: 'twitter:url', content: this._url }
+    ]);
 
-    // Add Twitter Card Metatags
-    this.meta.updateTag({ name: 'og:title', content: title });
-    this.meta.updateTag({ name: 'og:description', content: description });
-    this.meta.updateTag({ name: 'og:image', content: img });
-    this.meta.updateTag({ name: 'twitter:card', content: description });
-    this.meta.updateTag({ name: 'twitter:site', content: title });
-    this.meta.updateTag({ name: 'og:image:alt', content: title });
   }
 }

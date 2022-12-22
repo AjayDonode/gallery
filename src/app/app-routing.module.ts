@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'user',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [AuthGuard]
-  }, {
+  }, 
+  {
     path: 'gallery/:id',
     loadChildren: () =>
       import('./gallery/display/display.module').then(m => m.DisplayPageModule)
@@ -24,6 +25,11 @@ const routes: Routes = [
     path: 'addgallery/:id',
     loadChildren: () =>
       import('./gallery/addgallery/addgallery.module').then(m => m.AddgalleryPageModule)
+  },
+  {
+    path: 'gallery/user/:id',
+    loadChildren: () =>
+      import('./gallery/user/user.module').then(m => m.UserPageModule)
   },
   {
     path: 'user/list',
@@ -37,7 +43,8 @@ const routes: Routes = [
   // { path: 'list', loadChildren: './gallery/list/list.module#ListPageModule' },
   // { path: 'register', loadChildren: './login/register/register.module#RegisterPageModule' },
   { path: 'login', loadChildren: './login/login/login.module#LoginPageModule' },
-  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' } //,
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },   { path: 'user', loadChildren: './gallery/user/user.module#UserPageModule' }
+//,
 ];
 @NgModule({
   imports: [

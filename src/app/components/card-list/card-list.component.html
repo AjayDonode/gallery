@@ -3,22 +3,32 @@
     <ion-label>{{label}}</ion-label> <ion-chip> <ion-icon [hidden]="isGrid" name="grid" (click)="toggleIcon()"  ></ion-icon> <ion-icon [hidden]="!isGrid" name="list" (click)="toggleIcon()" ></ion-icon></ion-chip>
     <!-- <ion-item-devider></ion-item-devider> -->
   </ion-list-header>
-  <ion-list [hidden]="isGrid">
+  <ion-list [hidden]="!isGrid">
     <ion-item *ngFor="let gallery of data" >
+      <ion-thumbnail slot="start">
+        <img alt="{{gallery.name}}" src="{{gallery.images[0].filepath}}" />
+      </ion-thumbnail>
     <ion-label>
        <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
       </ion-label> 
   </ion-item>
 </ion-list>
-  <ion-slides [hidden]="!isGrid">
-      <ion-slide *ngFor="let gallery of data">
-        <ion-card>
-          <ion-card-content>
+<!-- <ion-slides paginationType="bullets" [hidden]="!isGrid" >
+  <ion-slide *ngFor="let gallery of data">
+    <img class="thumbnail" src="{{gallery.images[0].filepath}}" />
+    <ion-label>
+      <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
+      </ion-label> 
+  </ion-slide>
+</ion-slides> -->
 
-          </ion-card-content>
-          <ion-card-footer>
-            <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
-           </ion-card-footer> 
-          </ion-card>
-      </ion-slide>
-      </ion-slides>
+<ion-slides [options]="slideOptions" [hidden]="isGrid">
+  <ion-slide *ngFor="let gallery of data">
+    <ion-card  (click)="clickLink(gallery.id)" >
+      <ion-card-header color="primary">
+        <ion-card-subtitle>{{gallery.name}}</ion-card-subtitle>
+      </ion-card-header>
+      <img class="thumbnail" src="{{gallery.images[0].filepath}}" />
+      </ion-card>
+  </ion-slide>
+</ion-slides> 

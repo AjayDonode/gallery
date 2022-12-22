@@ -36,6 +36,27 @@ export class GalleryService {
     return this.gallerylist;
   }
 
+  getUserGalleryListById(currentUserId) {
+    const uid = currentUserId;
+    this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
+      // Compose a query using multiple .where() methods
+      return ref.where('createdby', '==', uid);
+    });
+    this.gallerylist = this.galleryCollection.valueChanges();
+    return this.gallerylist;
+  }
+
+
+  getSuggestedGalleryList() {
+    const uid = this.authenticationService.getCurrentUserId();
+    this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
+      // Compose a query using multiple .where() methods
+      return ref.orderBy('createdby' , 'desc');
+    });
+    this.gallerylist = this.galleryCollection.valueChanges();
+    return this.gallerylist;
+  }
+
   getGalleryList() {
     return this.gallerylist;
   }

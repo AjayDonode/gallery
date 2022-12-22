@@ -1,23 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      My Gallery
+      {{user?.displayName}}
     </ion-title>
-    <ion-buttons slot="start">
-      <ion-button (click)="openEnd()">
-        <ion-icon name="menu"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card class="welcome-card">
     <img src="{{user.bannerURL}}" alt="" />
-    <!-- <ion-card-header>
-        <ion-card-subtitle>Enjoy</ion-card-subtitle>
-        <ion-card-title>Welcome {{user.email}}</ion-card-title>
-      </ion-card-header> -->
+    <!-- <ion-card-header >
+        <ion-card-title>{{user.email}}</ion-card-title>
+      </ion-card-header>  -->
     <div class="profile-card">
       <ion-row >
         <img src="{{user.photoURL}}" />
@@ -28,7 +22,7 @@
         </div>
         <ng-template #email>
           <h4>
-            &nbsp; {{user?.email}}
+            &nbsp; {{user?.displayName}}
           </h4>
         </ng-template>
       </ion-row>
@@ -37,7 +31,7 @@
       </ion-row>
       <ion-row class="sharebox">
         <ion-col>
-          <a [routerLink]="['/user/list']" routerLinkActive="router-link-active">{{gallerylist.length}} Gallery</a>
+          {{gallerylist.length}} Gallery
         </ion-col>
         <ion-col>
           Follow
@@ -47,18 +41,17 @@
         </ion-col>
       </ion-row>
     </div>
-    <!-- <ion-card-content style="display: contents; height: 100%;">
-     
-    </ion-card-content> -->
+    
+   <ion-slides [options]="slideOptions">
+    <ion-slide *ngFor="let gallery of gallerylist">
+      <ion-card  (click)="doClick(gallery.id)" >
+        <ion-card-header color="primary">
+          <ion-card-subtitle>{{gallery.name}}</ion-card-subtitle>
+        </ion-card-header>
+        <img class="thumbnail" src="{{gallery.images[0].filepath}}" />
+        </ion-card>
+    </ion-slide>
+  </ion-slides> 
+
   </ion-card>
-  <div>
-    <app-card-list
-    [data]="gallerylist"
-    [label]="'My Gallery'"
-    (itemClicked)="doClick($event)">
-  </app-card-list>
-  </div>
-  
-
-
 </ion-content>

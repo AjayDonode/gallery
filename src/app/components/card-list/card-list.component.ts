@@ -10,6 +10,15 @@ export class CardListComponent implements OnInit {
   @Input() label = '';
   @Output() itemClicked = new EventEmitter();
   isGrid = false;
+  
+
+  slideOptions = {
+    initialSlide: 0,
+    slidesPerView: 2,
+    autoplay: true
+  };
+
+  
   constructor() { }
 
   ngOnInit() {
@@ -25,4 +34,5 @@ export class CardListComponent implements OnInit {
     this.itemClicked.emit(id);
   }
 
+  
 }

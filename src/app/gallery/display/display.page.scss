@@ -14,6 +14,12 @@ gallery-card {
 .swiper-slide {
   text-align: left;
 }
+
+.swiper-slide img {
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+}
 // .header {
 //     height: 20px;
 //     padding: 10px;
@@ -31,6 +37,12 @@ gallery-card {
 //     background-color: rgba(18, 22, 27, 0.404);
 //     font-weight: 200;
 //     }
+
+
+
+.sc-ion-card-md-h {
+    width: 100%;
+}
 
 .button-bar {
   padding: 5px;

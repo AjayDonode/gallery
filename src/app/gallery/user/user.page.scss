@@ -1,11 +1,14 @@
+ion-item {
+    border-bottom: 2px dotted var(--ion-color-medium);
+    padding: 20px;
+}
+
 .welcome-card 
-{  
+{  height: 95%;
 img {
-  max-height: 35vh;
   overflow: hidden;
 }
 }
-
 .sharebox{
   border-top: thin solid #cccccc;
   text-align: left;
