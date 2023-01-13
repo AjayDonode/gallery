@@ -47,4 +47,8 @@ export class CreateGalleryModalPage implements OnInit {
   async closeModal() {
     await this.modalController.dismiss();
   }
+
+  addHtmlContent(){
+    
+  }
 }

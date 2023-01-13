@@ -16,10 +16,12 @@
   </ion-item>
 
   <ion-item>
+    <ion-button slot="end" (click)="addHtmlContent()">
+      <ion-icon name="paper"></ion-icon>
+    </ion-button>
     <ion-label position="floating">Description</ion-label>
     <ion-textarea rows="10" [(ngModel)]="gallery.description"></ion-textarea>
   </ion-item>
-
 </ion-content>
 
 <ion-footer>

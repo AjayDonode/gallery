@@ -21,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { EditProfilePageModule } from './profile/edit-profile/edit-profile.module';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-
+import { QuillModule } from 'ngx-quill'
+import { ModalCommentComponentModule } from './gallery/display/add-comment-modal/modal-comment.module';
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
@@ -30,14 +31,17 @@ firebase.initializeApp(environment.firebase);
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    QuillModule.forRoot(),
     AppRoutingModule,
     CreateGalleryPageModule,
+    ModalCommentComponentModule,
     EditProfilePageModule,
     ComponentsModule,
     AngularFireModule.initializeApp(environment.firebase, 'Granth'), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
-    AngularFireAuthModule // import for Auth and users storage
+    AngularFireAuthModule
+    
   ],
   providers: [
     StatusBar,

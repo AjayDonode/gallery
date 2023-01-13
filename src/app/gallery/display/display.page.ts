@@ -7,6 +7,10 @@ import { PageVisitorTrack } from 'src/app/modals/PageVisitorTrack';
 import { LoaderService } from 'src/app/services/loader-service.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Gallery } from '../addgallery/Gallery';
+import { FeedbackService } from 'src/app/services/feedback.service';
+import { Like } from 'src/app/modals/Like';
+import { ModalController } from '@ionic/angular';
+import { ModalCommentComponent } from './add-comment-modal/modal-comment.component';
 
 @Component({
   selector: 'app-display',
@@ -20,13 +24,16 @@ export class DisplayPage implements OnInit {
   loaded = false;
   galleryId: any;
   visitor: PageVisitorTrack;
+  likeCount = 0;
 
   constructor(private arouter: ActivatedRoute, 
               private imageDBService: GalleryService,
               private sharing: SeoService ,
               private socialSharing: SocialSharing, 
               private pageViewService: PageCounterService,
-              private loader: LoaderService) { }
+              private feedBackService: FeedbackService,
+              private loader: LoaderService,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.loader.loadingPresent('Loading', 1000);
@@ -35,7 +42,9 @@ export class DisplayPage implements OnInit {
       this.loadGallery();
       this.setPageView();
       // this.ionViewDidLoad();
+      this.getLikeCount();
     }
+   
   }
 
   async loadGallery() {
@@ -67,10 +76,44 @@ export class DisplayPage implements OnInit {
        }
 
 
+  likeIt(gallery: Gallery) {
+    const like: Like = {
+      articleId: this.gallery.id,
+      userId: "currentUser",
+      createdAt: new Date()
+    };
+    this.feedBackService.addLike(like).then(() => {
+      console.log('Like added successfully!');
+    }).catch((error) => {
+      console.log('Error adding like:', error);
+    });
+  }
+
+  getLikeCount() {
+    this.feedBackService.getLikeCount(this.galleryId).subscribe(count => {
+        this.likeCount = count;
+    });
+  }
+
   setPageView() {
       this.pageViewService.get(this.galleryId).subscribe(res => {
       // this.visitor = res;
       // this.visitor.visitcount++;
     });
   }
+
+
+  async openModal(gallery: Gallery) {
+    const modal = await this.modalCtrl.create({
+      component: ModalCommentComponent,
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'confirm') {
+      //this.message = `Hello, ${data}!`;
+    }
+  }
+
 }

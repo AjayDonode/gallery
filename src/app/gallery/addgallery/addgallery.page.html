@@ -7,6 +7,11 @@
           <ion-icon name="home"></ion-icon>
         </ion-button>
       </ion-buttons> -->
+      <ion-buttons slot="end">
+        <ion-button  icon-only color="save" (click)="addNext()">
+          <ion-icon name="add"></ion-icon> Add Next
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 </ion-header>
@@ -34,9 +39,14 @@
       <input id="uploadBtn" type="file" accept="image/*"  class="upload" (change)="addImages(currentImage, $event.target.files)" />
     </ion-item>
     <ion-item>
+      <ion-button slot="end">
+        <ion-icon name="paper"></ion-icon>
+      </ion-button>
       <ion-label position="stacked">Description</ion-label>
       <ion-textarea autosize rows="15" [(ngModel)]="currentImage.description"></ion-textarea>
     </ion-item>
+    
+    
   </ion-card>
 </ion-content>
 <ion-footer>

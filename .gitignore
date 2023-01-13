@@ -8,6 +8,8 @@
 *.tmp.*
 *.sublime-project
 *.sublime-workspace
+.angular
+.firebase
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
@@ -29,6 +31,6 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/e2e
 src/environments/environment.prod.ts
 src/environments/environment.ts
-

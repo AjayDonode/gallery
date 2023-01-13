@@ -1,0 +1,16 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancel()">Back</ion-button>
+      </ion-buttons>
+      <ion-title>Comments</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="saveAndClose()">Save</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input [(ngModel)]="name" placeholder="Add your comment"></ion-input>
+    </ion-item>
+  </ion-content>
