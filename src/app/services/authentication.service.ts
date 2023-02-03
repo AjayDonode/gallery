@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
-import { UserService } from './user.service';
 
 @Injectable()
 export class AuthenticationService {
@@ -13,11 +11,11 @@ export class AuthenticationService {
       if (user) {
         this.userData = user; // Setting up user data in userData var
         localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+       // JSON.parse(localStorage.getItem('user'));
         this.authState.next(true);
       } else {
         localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+       // JSON.parse(localStorage.getItem('user'));
         this.authState.next(false);
       }
     });
@@ -30,8 +28,6 @@ export class AuthenticationService {
           err => reject(err));
     });
   }
-
-
 
   loginUser(value) {
     return new Promise<any>((resolve, reject) => {
@@ -52,9 +48,11 @@ export class AuthenticationService {
   }
 
   getCurrentUser() {
+    console.log(this.userData);
     if (this.userData == null) {
       this.userData = JSON.parse(localStorage.getItem('user'));
     }
+    console.log("After get user {} ", this.userData)
     return this.userData;
   }
 

@@ -5,12 +5,15 @@ import { SeoService } from 'src/app/services/seo.service';
 import { PageCounterService } from 'src/app/services/pagecounter.service';
 import { PageVisitorTrack } from 'src/app/modals/PageVisitorTrack';
 import { LoaderService } from 'src/app/services/loader-service.service';
+import { UserService } from 'src/app/services/user.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Gallery } from '../addgallery/Gallery';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { Like } from 'src/app/modals/Like';
 import { ModalController } from '@ionic/angular';
 import { ModalCommentComponent } from './add-comment-modal/modal-comment.component';
+import { User } from 'src/app/modals/User';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-display',
@@ -25,11 +28,14 @@ export class DisplayPage implements OnInit {
   galleryId: any;
   visitor: PageVisitorTrack;
   likeCount = 0;
+  commentCount = 0;
+  currentUserId : any;
 
   constructor(private arouter: ActivatedRoute, 
               private imageDBService: GalleryService,
               private sharing: SeoService ,
               private socialSharing: SocialSharing, 
+              private authService: AuthenticationService,
               private pageViewService: PageCounterService,
               private feedBackService: FeedbackService,
               private loader: LoaderService,
@@ -43,7 +49,11 @@ export class DisplayPage implements OnInit {
       this.setPageView();
       // this.ionViewDidLoad();
       this.getLikeCount();
+      this.getCommentCount();
+
     }
+
+    this.currentUserId = this.authService.getCurrentUserId();
    
   }
 
@@ -79,7 +89,7 @@ export class DisplayPage implements OnInit {
   likeIt(gallery: Gallery) {
     const like: Like = {
       articleId: this.gallery.id,
-      userId: "currentUser",
+      userId: this.currentUserId,
       createdAt: new Date()
     };
     this.feedBackService.addLike(like).then(() => {
@@ -95,10 +105,14 @@ export class DisplayPage implements OnInit {
     });
   }
 
+  getCommentCount() {
+    this.feedBackService.getCommentCount(this.galleryId).subscribe(count => {
+        this.commentCount = count;
+    });
+  }
+
   setPageView() {
       this.pageViewService.get(this.galleryId).subscribe(res => {
-      // this.visitor = res;
-      // this.visitor.visitcount++;
     });
   }
 
@@ -106,13 +120,16 @@ export class DisplayPage implements OnInit {
   async openModal(gallery: Gallery) {
     const modal = await this.modalCtrl.create({
       component: ModalCommentComponent,
+      componentProps: {
+        galleryid: this.galleryId,
+      }
     });
     modal.present();
 
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm') {
-      //this.message = `Hello, ${data}!`;
+    
     }
   }
 

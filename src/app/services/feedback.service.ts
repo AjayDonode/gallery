@@ -26,7 +26,28 @@ export class FeedbackService {
     return this.likesCollection.doc(likeId).delete();
   }
 
+  getLikeCount(articleId: string) {
+    return this.afs.collection<Like>('likes', ref => ref.where('articleId', '==', articleId)).valueChanges().pipe(
+      map(likes => likes.length)
+    );
+  }
+
   // Comments
+
+   
+  getCommentCount(articleId: string) {
+    return this.afs.collection<Like>('comments', ref => ref.where('articleId', '==', articleId)).valueChanges().pipe(
+      map(comments => comments.length)
+    );
+  }
+
+  getComments(galleryId: String) {
+    console.log(galleryId)
+    return this.afs.collection<Comment>('comments', ref => ref.where('articleId', '==', galleryId)).valueChanges().pipe(
+      map(comments => comments)
+    );
+  }
+
   async addComment(comment: Comment) {
     return this.commentsCollection.add(comment);
   }
@@ -38,10 +59,5 @@ export class FeedbackService {
   async deleteComment(commentId: string) {
     return this.commentsCollection.doc(commentId).delete();
   }
-
-  getLikeCount(articleId: string) {
-    return this.afs.collection<Like>('likes', ref => ref.where('articleId', '==', articleId)).valueChanges().pipe(
-      map(likes => likes.length)
-    );
-  }
+  
 }

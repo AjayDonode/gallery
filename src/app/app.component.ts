@@ -35,7 +35,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.userService.getUser().subscribe(res=> {this.user  = res; });
+      this.userService.getUser().subscribe(res=> {this.user  = res; 
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
+      });
     });
   }
 

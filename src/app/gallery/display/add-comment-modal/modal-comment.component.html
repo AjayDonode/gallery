@@ -5,12 +5,29 @@
       </ion-buttons>
       <ion-title>Comments</ion-title>
       <ion-buttons slot="end">
-        <ion-button (click)="saveAndClose()">Save</ion-button>
+        <ion-button [disabled]="comment.content ===''" (click)="saveAndClose()">Save</ion-button>
       </ion-buttons>
     </ion-toolbar>
 </ion-header>
   <ion-content class="ion-padding">
     <ion-item>
-      <ion-input [(ngModel)]="name" placeholder="Add your comment"></ion-input>
+      <ion-textarea  class="custom-textarea" [(ngModel)]="comment.content" placeholder="Add your comment"></ion-textarea>
     </ion-item>
+
+    <ion-list>
+      <ion-item *ngFor="let comment of comments" >
+
+        <!-- <ion-item > -->
+          <ion-avatar slot="start">
+            <img src="{{comment.userAvatar}}">
+          </ion-avatar>
+          <ion-label>
+            <h3>{{comment.userId}}</h3>
+            <p >{{comment.content}}</p>
+          </ion-label>
+         
+          <ion-note slot="end"> {{comment.createdAt | date: shortDate }}</ion-note>
+        <!-- </ion-item> -->
+    </ion-item>
+  </ion-list>
   </ion-content>

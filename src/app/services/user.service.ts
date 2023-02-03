@@ -12,6 +12,7 @@ import { resolve } from 'url';
 export class UserService {
   private userCollection: AngularFirestoreCollection<User>;
   private users: Observable<User[]>;
+  private currentUser:User;
   constructor(private database: AngularFirestore, private authService: AuthenticationService) {
     this.userCollection = database.collection<User>('users');
     this.users = this.userCollection.snapshotChanges().pipe(
@@ -43,5 +44,9 @@ export class UserService {
 
   getUserWithID(currentUserId): any {
     return this.userCollection.doc<User>(currentUserId).valueChanges();
+  }
+
+  getCurrentUser() {
+    this.authService.getCurrentUser();
   }
 }
