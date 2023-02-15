@@ -3,6 +3,7 @@
 img {
   max-height: 35vh;
   overflow: hidden;
+  object-fit: cover;
 }
 }
 
@@ -12,7 +13,7 @@ img {
 }
 
 .profile-card {
-  text-align: center;
+  text-align: left;
   padding: 10px;
   img{
     width: 50px;
