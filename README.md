@@ -17,8 +17,11 @@
    changed 
 
    # Open Issues 
+      1. Html tags supported input for pages 
       1. Upload User Profile and Banner image dont refresh  correctly 
       1. Remove swipe symbol from Header page 
       1. Header page should allow to upload image 
       1. Article should support upload/persistence without images, 
          Defect : currently if image is not uploaded gallery is not displayed correctly 
+
+         Help ! https://ej2.syncfusion.com/angular/documentation/rich-text-editor/getting-started

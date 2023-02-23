@@ -5,8 +5,9 @@
   </ion-list-header>
   <ion-list [hidden]="!isGrid">
     <ion-item *ngFor="let gallery of data" >
-      <ion-thumbnail slot="start">
-        <img alt="{{gallery.name}}" src="{{gallery.images[0].filepath}}" />
+      <ion-thumbnail slot="start" >
+        <ion-img alt="{{gallery.name}}" [src]="getThumbImage(gallery)">
+      </ion-img>
       </ion-thumbnail>
     <ion-label>
        <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
@@ -28,7 +29,8 @@
       <ion-card-header color="primary">
         <ion-card-subtitle>{{gallery.name}}</ion-card-subtitle>
       </ion-card-header>
-      <img class="thumbnail" src="{{gallery.images[0].filepath}}" />
+      <ion-img class="thumbnail" [src]="getThumbImage(gallery)"  >
+    </ion-img>
       </ion-card>
   </ion-slide>
 </ion-slides> 

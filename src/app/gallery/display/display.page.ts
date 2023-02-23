@@ -67,7 +67,7 @@ export class DisplayPage implements OnInit {
   }
 
    shareLink(gallery: Gallery) {
-    this.sharing.addTwitterCard(gallery.name, gallery.description, gallery.images[0].filepath);
+    this.sharing.addTwitterCard(gallery.name, gallery.description, gallery.filepath);
    }
 
   shareIt(shareOn : string, gallery: Gallery) {
@@ -134,3 +134,5 @@ export class DisplayPage implements OnInit {
   }
 
 }
+
+

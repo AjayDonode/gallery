@@ -18,14 +18,18 @@
                   <ion-card-title >{{ gallery?.name }}</ion-card-title>
                   
                 </ion-card-header>
+                <img
+                [src]="gallery.filepath"
+                [hidden]="loaded"
+              />
                 <ion-card-content>
                  <p [innerHTML]=gallery?.description></p>  
                 </ion-card-content>
 
-                <ion-row>
+                <!-- <ion-row>
                     <ion-col><img src="/assets/swipe-helper.gif"/> </ion-col>
                     <ion-col class="ion-justify-content-center">Swipe to navigate>></ion-col> 
-                </ion-row>
+                </ion-row> -->
                 
                 <ion-row class="button-bar">
                   <ion-col size-md="3"  class="ion-text-left" >

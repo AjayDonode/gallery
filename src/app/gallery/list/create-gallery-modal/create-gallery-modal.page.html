@@ -1,9 +1,14 @@
 <ion-header>
   <ion-toolbar class="ion-text-center">
-    <ion-title>Add Gallery</ion-title>
+    <ion-title>Add new gallery</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<div *ngIf="percentage | async as pct">
+  <ion-progress-bar value="{{ pct / 100 }}"></ion-progress-bar>
+</div>
+<div *ngIf="snapshot | async as snap">
+  <div *ngIf="snapshot && snap.bytesTransferred != snap.totalBytes"></div>
+</div>
 <ion-content class="ion-padding">
   <ion-item>
     <ion-label position="floating">Title</ion-label>
@@ -15,12 +20,20 @@
     <ion-input [(ngModel)]="gallery.tags"></ion-input>
   </ion-item>
 
+  <ion-item [hidden]="!gallery.filepath">
+    <img width="50px" src="{{gallery.filepath}}" />
+  </ion-item>
+  <ion-item>
+    <ion-label>Select Image</ion-label>
+    <input id="uploadBtn" type="file" accept="image/*"  class="upload" (change)="addImages(currentImage, $event.target.files)" />
+  </ion-item>
+
   <ion-item>
     <ion-button slot="end" (click)="addHtmlContent()">
       <ion-icon name="paper"></ion-icon>
     </ion-button>
     <ion-label position="floating">Description</ion-label>
-    <ion-textarea rows="10" [(ngModel)]="gallery.description"></ion-textarea>
+    <ion-textarea rows="20" contenteditable="true" [(ngModel)]="gallery.description"></ion-textarea>
   </ion-item>
 </ion-content>
 

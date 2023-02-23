@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Gallery } from 'src/app/gallery/addgallery/Gallery';
 
 @Component({
   selector: 'app-card-list',
@@ -34,5 +35,13 @@ export class CardListComponent implements OnInit {
     this.itemClicked.emit(id);
   }
 
+  getThumbImage(gallery:Gallery){
+    var imageUrl = gallery.filepath;
+    if(imageUrl == undefined){
+      if (gallery.images.length > 0) imageUrl = gallery.images[0].filepath;
+      else imageUrl = "/assets/dummy.jpeg";
+    }
+    return imageUrl;
+  }
   
 }
