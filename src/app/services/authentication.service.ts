@@ -48,17 +48,18 @@ export class AuthenticationService {
   }
 
   getCurrentUser() {
-    console.log(this.userData);
     if (this.userData == null) {
       this.userData = JSON.parse(localStorage.getItem('user'));
     }
-    console.log("After get user {} ", this.userData)
     return this.userData;
   }
 
   getCurrentUserId() {
     this.getCurrentUser();
-    return this.userData.uid;
+    if(this.userData == null) 
+      return null ; 
+    else 
+      return this.userData.uid;
   }
 
   isLoggedIn(): boolean {

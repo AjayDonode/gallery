@@ -8,7 +8,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="gallery-card" *ngIf="gallery !== undefined" fullscreen>
+<ion-content class="gallery-card" *ngIf="gallery !== undefined" fullscreen [scrollEvents]="true" style="height: 100vh" (ionScroll)="onScroll($event)" >
   <ion-slides>
       <ion-slide >
           <ion-card >

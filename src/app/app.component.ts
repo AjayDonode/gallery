@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,6 +14,7 @@ import { UserService } from './services/user.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  isFullScreen = false;
   user: User = {
     displayName: null,
     email: null
@@ -59,6 +60,15 @@ export class AppComponent {
     );
   }
 
+  @HostListener('document:ionSwipeUp', ['$event'])
+  onSwipeUp(event: any) {
+    this.isFullScreen = true;
+  }
+
+  @HostListener('document:ionSwipeDown', ['$event'])
+  onSwipeDown(event: any) {
+    this.isFullScreen = false;
+  }
 
 
 }

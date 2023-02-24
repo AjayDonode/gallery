@@ -30,6 +30,8 @@ export class DisplayPage implements OnInit {
   likeCount = 0;
   commentCount = 0;
   currentUserId : any;
+  currentScrollPosition = 0;
+
 
   constructor(private arouter: ActivatedRoute, 
               private imageDBService: GalleryService,
@@ -131,6 +133,11 @@ export class DisplayPage implements OnInit {
     if (role === 'confirm') {
     
     }
+  }
+
+
+  onScroll(event) {
+    this.currentScrollPosition = event.detail.currentY;
   }
 
 }
