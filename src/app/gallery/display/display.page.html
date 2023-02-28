@@ -23,7 +23,7 @@
                 [hidden]="loaded"
               />
                 <ion-card-content>
-                 <p [innerHTML]=gallery?.description></p>  
+                 <p [innerHTML] = gallery?.description></p>  
                 </ion-card-content>
 
                 <!-- <ion-row>
@@ -66,24 +66,31 @@
             <p [innerHTML]=data.description></p>  
           </ion-card-content>
    
-          <ion-row class="button-bar">
-            <ion-col size-md="3"  class="ion-text-left" >
+          <ion-footer class="button-bar">
+            <!-- <ion-col size-md="3"  class="ion-text-left" > -->
               <div >
                 <ion-button fill="clear" color="dark" size="small" (click)="likeIt(gallery)"><ion-icon name="thumbs-up"></ion-icon></ion-button>
                 <ion-badge color="primary">{{likeCount}}</ion-badge>
                 <ion-button fill="clear" color="dark" size="small" (click)="openModal(gallery)"><ion-icon name="text"></ion-icon></ion-button> 
                 <ion-badge color="primary">{{commentCount}}</ion-badge>
               </div>
-            </ion-col>
+            <!-- </ion-col> -->
 
-            <ion-col size-md="3"  class="ion-text-right" >
-             </ion-col>
-          </ion-row>
+            <!-- <ion-col size-md="3"  class="ion-text-right" >
+             </ion-col> -->
+          </ion-footer>
         <!-- </ion-card-content> -->        
       </ion-card>
-
     </ion-slide>
   </ion-slides>
+  <div>
+    <app-card-list
+    [data]="recoList"
+    [label]="'View more'"
+    (itemClicked)="doClick($event)">
+  </app-card-list>
+  </div>
+
   <!-- <button ion-button *ngIf="slides.i()">Next</button> -->
   <!-- <ion-footer height=10px>
     <ion-toolbar>

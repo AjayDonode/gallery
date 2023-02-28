@@ -31,15 +31,18 @@ export class DisplayPage implements OnInit {
   commentCount = 0;
   currentUserId : any;
   currentScrollPosition = 0;
+  recoList: any[] = [];
 
 
   constructor(private arouter: ActivatedRoute, 
               private imageDBService: GalleryService,
               private sharing: SeoService ,
               private socialSharing: SocialSharing, 
+              private router: Router,
               private authService: AuthenticationService,
               private pageViewService: PageCounterService,
               private feedBackService: FeedbackService,
+              private galleryService: GalleryService,
               private loader: LoaderService,
               private modalCtrl: ModalController) { }
 
@@ -56,8 +59,10 @@ export class DisplayPage implements OnInit {
     }
 
     this.currentUserId = this.authService.getCurrentUserId();
+    this.loadRecomandations(this.currentUserId )
    
   }
+  
 
   async loadGallery() {
     this.imageDBService.getGallery(this.galleryId).subscribe(res => {
@@ -66,6 +71,14 @@ export class DisplayPage implements OnInit {
       this.shareLink(this.gallery);
       this.loaded = true;
     });
+  }
+
+  loadRecomandations(currentUserId: any) {
+    this.galleryService.getUserGalleryList().subscribe(res => {
+      this.recoList = res;
+    });
+
+   
   }
 
    shareLink(gallery: Gallery) {
@@ -139,6 +152,11 @@ export class DisplayPage implements OnInit {
   onScroll(event) {
     this.currentScrollPosition = event.detail.currentY;
   }
+
+  doClick(event) {
+    this.router.navigate(['/gallery/', event]);
+  }
+
 
 }
 

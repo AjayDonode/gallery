@@ -36,6 +36,17 @@ export class GalleryService {
     return this.gallerylist;
   }
 
+
+  getRecoGalleryList() {
+    const uid = this.authenticationService.getCurrentUserId();
+    this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
+      // Compose a query using multiple .where() methods
+      return ref.orderBy('createdon');
+    });
+    // this.gallerylist = this.galleryCollection.valueChanges();
+    return this.galleryCollection.valueChanges();
+  }
+
   getUserGalleryListById(currentUserId) {
     const uid = currentUserId;
     this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
