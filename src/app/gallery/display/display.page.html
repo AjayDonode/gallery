@@ -8,7 +8,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="gallery-card" *ngIf="gallery !== undefined" fullscreen [scrollEvents]="true" style="height: 100vh" (ionScroll)="onScroll($event)" >
+<ion-content class="gallery-card" *ngIf="gallery !== undefined"  style="height: 100vh" (ionScroll)="onScroll($event)" >
   <ion-slides>
       <ion-slide >
           <ion-card >
@@ -16,22 +16,20 @@
                 
                 <ion-card-header color="primary">
                   <ion-card-title >{{ gallery?.name }}</ion-card-title>
-                  
                 </ion-card-header>
-                <img
-                [src]="gallery.filepath"
-                [hidden]="loaded"
-              />
+                <!-- <ion-scroll> -->
+                <ion-img *ngIf="gallery.filepath" [src]="gallery.filepath" > </ion-img>
                 <ion-card-content>
                  <p [innerHTML] = gallery?.description></p>  
                 </ion-card-content>
-
-                <!-- <ion-row>
-                    <ion-col><img src="/assets/swipe-helper.gif"/> </ion-col>
-                    <ion-col class="ion-justify-content-center">Swipe to navigate>></ion-col> 
-                </ion-row> -->
-                
-                <ion-row class="button-bar">
+                <ion-item>
+                  <ion-icon slot="start" name="arrow-back"></ion-icon>
+                 
+                  <!-- <ion-label>Swipe left and right</ion-label> -->
+                  <ion-icon slot="end" name="arrow-forward"></ion-icon>
+                </ion-item>
+              <!-- </ion-scroll> -->
+                <ion-footer class="button-bar">
                   <ion-col size-md="3"  class="ion-text-left" >
                     <div >
                       <ion-button fill="clear" color="dark" size="small" (click)="likeIt(gallery)" ><ion-icon name="thumbs-up"></ion-icon></ion-button>
@@ -44,8 +42,9 @@
                   <ion-col size-md="3"  class="ion-text-right" >
                  </ion-col>
               
-                </ion-row>
+                </ion-footer>
               <!-- </ion-card-content> -->
+            
             </ion-card>
       </ion-slide>
       
