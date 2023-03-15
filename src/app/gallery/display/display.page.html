@@ -9,7 +9,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="gallery-card" *ngIf="gallery !== undefined"  style="height: 100vh" (ionScroll)="onScroll($event)" >
-  <ion-slides>
+  <!-- Image overlay -->
+  <div class="image-overlay" *ngIf="showImage">
+    <img src="/assets/swipe-helper.gif" alt="Image overlay" />
+  </div>
+
+  <ion-slides >
       <ion-slide >
           <ion-card >
               <!-- <ion-card-content> -->
@@ -22,12 +27,7 @@
                 <ion-card-content>
                  <p [innerHTML] = gallery?.description></p>  
                 </ion-card-content>
-                <ion-item>
-                  <ion-icon slot="start" name="arrow-back"></ion-icon>
-                 
-                  <!-- <ion-label>Swipe left and right</ion-label> -->
-                  <ion-icon slot="end" name="arrow-forward"></ion-icon>
-                </ion-item>
+              
               <!-- </ion-scroll> -->
                 <ion-footer class="button-bar">
                   <ion-col size-md="3"  class="ion-text-left" >
@@ -82,6 +82,7 @@
       </ion-card>
     </ion-slide>
   </ion-slides>
+  
   <div>
     <app-card-list
     [data]="recoList"

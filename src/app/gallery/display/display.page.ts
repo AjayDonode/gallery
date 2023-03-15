@@ -33,6 +33,7 @@ export class DisplayPage implements OnInit {
   currentUserId : any;
   currentScrollPosition = 0;
   recoList: any[] = [];
+  showImage= true;
 
 
   constructor(private arouter: ActivatedRoute, 
@@ -56,12 +57,17 @@ export class DisplayPage implements OnInit {
       // this.ionViewDidLoad();
       this.getLikeCount();
       this.getCommentCount();
+      this.hideImage();
 
     }
 
     this.currentUserId = this.authService.getCurrentUserId();
     this.loadRecomandations(this.currentUserId )
    
+  }
+
+  hideImage() {
+   setTimeout(()=> {this.showImage = false}, 10000);
   }
   
 

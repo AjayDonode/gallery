@@ -23,7 +23,7 @@
           <img src="{{comment.userAvatar}}">
         </ion-avatar>
         <ion-label style="margin: 10px;"> {{comment.userId}} 
-          <ion-note class="comment-timestamp"> {{comment.createdAt | date: shortDate }}</ion-note>
+          <ion-note slot="end" class="comment-timestamp"> {{comment.createdAt | date: shortDate }}</ion-note>
         </ion-label>
         
       </ion-row>
