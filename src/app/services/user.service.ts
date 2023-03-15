@@ -39,7 +39,7 @@ export class UserService {
   }
 
   getUser(): any {
-    return this.userCollection.doc<User>(this.authService.getCurrentUserId()).valueChanges();
+      return this.userCollection.doc<User>(this.authService.getCurrentUserId()).valueChanges();
   }
 
   getUserWithID(currentUserId): any {

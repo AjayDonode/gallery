@@ -1,11 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
+// import { Base64 } from '@ionic-native/base64/ngx';
 @Injectable({
   providedIn: 'root'
 })
 export class SeoService {
   _url :any; 
-  constructor(private title: Title, private metaService: Meta) {}
+  constructor( private title: Title, private metaService: Meta) {}
+
+  shareData = {
+    title: 'My awesome tweet',
+    text: 'Check out this awesome tweet I found!',
+    url: 'https://twitter.com/',
+    files: [
+      new File(
+        ['https://example.com/image.jpg'],
+        'image.jpg',
+        { type: 'image/jpeg' }
+      )
+    ]
+  };
 
   addTwitterCard(title, description, img) {
     // Set HTML Document Title
@@ -28,5 +42,12 @@ export class SeoService {
       { name: 'twitter:url', content: this._url }
     ]);
 
+  }
+
+  getShareData(title, description, img){
+    this.shareData.title = title;
+    this.shareData.text = description;
+   // this.shareData.files.push(base64.img);
+    return this.shareData;
   }
 }

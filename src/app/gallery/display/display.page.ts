@@ -15,6 +15,7 @@ import { ModalCommentComponent } from './add-comment-modal/modal-comment.compone
 import { User } from 'src/app/modals/User';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
+
 @Component({
   selector: 'app-display',
   templateUrl: './display.page.html',
@@ -86,10 +87,13 @@ export class DisplayPage implements OnInit {
    }
 
   shareIt(shareOn : string, gallery: Gallery) {
-            
+   const sharedData =  this.sharing.getShareData(gallery.name, gallery.description, gallery.filepath);
             if(shareOn == "twitter")
               {
-              window.open("https://twitter.com/intent/tweet?text="+gallery.name +"&url="+window.location, '_blank', 'location=no')
+                // if(navigator.share)
+                // { window.navigator.share(sharedData); } 
+                // else
+                window.open("https://twitter.com/intent/tweet?text="+gallery.name +"&url="+window.location, '_blank', 'location=no')
               }
             else if(shareOn == "whatsapp"){
                 window.open("https://api.whatsapp.com/send?text="+gallery.name +"-"+window.location, '_blank', 'location=no')

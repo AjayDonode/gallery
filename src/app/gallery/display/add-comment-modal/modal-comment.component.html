@@ -4,30 +4,33 @@
         <ion-button (click)="cancel()">Back</ion-button>
       </ion-buttons>
       <ion-title>Comments</ion-title>
-      <ion-buttons slot="end">
+      <!-- <ion-buttons slot="end">
         <ion-button [disabled]="comment.content ===''" (click)="saveAndClose()">Save</ion-button>
-      </ion-buttons>
+      </ion-buttons> -->
     </ion-toolbar>
 </ion-header>
   <ion-content class="ion-padding">
-    <ion-item>
-      <ion-textarea  class="custom-textarea" [(ngModel)]="comment.content" placeholder="Add your comment"></ion-textarea>
-    </ion-item>
+    <div style="position: relative;">
+      <ion-textarea  class="rounded-textarea" [(ngModel)]="comment.content" placeholder="Add your comment"></ion-textarea>
+      <ion-button size="small"
+      style="position: absolute; bottom: 5px; right: 5px; z-index: 2;"  
+      (click)="saveAndClose()"> <ion-icon name="send"></ion-icon> </ion-button>
+    </div>
 
-    <ion-list>
-      <ion-item *ngFor="let comment of comments" >
-
-        <!-- <ion-item > -->
-          <ion-avatar slot="start">
-            <img src="{{comment.userAvatar}}">
-          </ion-avatar>
+    <ion-card *ngFor="let comment of comments" style="margin-left: 0%; margin-right: 0%;">
+      <ion-row>
+        <ion-avatar >
+          <img src="{{comment.userAvatar}}">
+        </ion-avatar>
+        <ion-label style="margin: 10px;"> {{comment.userId}} 
+          <ion-note class="comment-timestamp"> {{comment.createdAt | date: shortDate }}</ion-note>
+        </ion-label>
+        
+      </ion-row>
+      <ion-item>
           <ion-label>
-            <h3>{{comment.userId}}</h3>
-            <p >{{comment.content}}</p>
+            <p style="white-space: pre-wrap;">{{comment.content}}</p>
           </ion-label>
-         
-          <ion-note slot="end"> {{comment.createdAt | date: shortDate }}</ion-note>
-        <!-- </ion-item> -->
     </ion-item>
-  </ion-list>
+  </ion-card>
   </ion-content>
