@@ -7,8 +7,7 @@
     </ion-tab-button>
 
     <ion-tab-button tab="stars">
-      <ion-icon name="add-circle-outline"></ion-icon>
-      <ion-label>New</ion-label>
+      
     </ion-tab-button>
 
     <ion-tab-button tab="likes">
@@ -16,5 +15,10 @@
       <ion-label>Loved</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
-
 </ion-tabs>
+
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add" (click)="createNewGallery()" ></ion-icon>
+  </ion-fab-button>
+</ion-fab>

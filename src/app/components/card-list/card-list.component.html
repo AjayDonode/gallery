@@ -4,15 +4,19 @@
     <!-- <ion-item-devider></ion-item-devider> -->
   </ion-list-header>
   <ion-list [hidden]="!isGrid">
-    <ion-item *ngFor="let gallery of data" >
+    <ion-item class="custom-item" *ngFor="let gallery of data" >
       <ion-thumbnail slot="start" >
-        <ion-img alt="{{gallery.name}}" [src]="getThumbImage(gallery)">
+        
+        <ion-img class="height:100%" (click)="clickLink(gallery.id)" alt="{{gallery.name}}" [src]="getThumbImage(gallery)">
       </ion-img>
+     
       </ion-thumbnail>
     <ion-label>
-       <a (click)="clickLink(gallery.id)"> <h4>{{gallery.name}}</h4> </a>
-      </ion-label> 
-  </ion-item>
+        <a (click)="clickLink(gallery.id)"> <h2>{{gallery.name}}</h2> </a>
+    </ion-label> 
+      <!-- <p>{{gallery.description}}</p> -->
+      <ion-icon name="create" (click)="editItem(gallery)"></ion-icon>
+</ion-item>
 </ion-list>
 <!-- <ion-slides paginationType="bullets" [hidden]="!isGrid" >
   <ion-slide *ngFor="let gallery of data">
@@ -23,10 +27,10 @@
   </ion-slide>
 </ion-slides> -->
 
-<ion-slides [options]="slideOptions" [hidden]="isGrid">
+<ion-slides [options]="slideOptions" [hidden]="isGrid" pager>
   <ion-slide *ngFor="let gallery of data">
-    <ion-card  (click)="clickLink(gallery.id)" >
-      <ion-card-header color="primary">
+    <ion-card class="gallerycard"  (click)="clickLink(gallery.id)" >
+      <ion-card-header style="height: fit-content; padding: 5px" color="primary">
         <ion-card-subtitle>{{gallery.name}}</ion-card-subtitle>
       </ion-card-header>
       <ion-img class="thumbnail" [src]="getThumbImage(gallery)"  >

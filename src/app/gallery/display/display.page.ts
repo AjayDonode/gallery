@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { GalleryService } from 'src/app/services/gallery.service';
+import { UserService } from 'src/app/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from 'src/app/services/seo.service';
 import { PageCounterService } from 'src/app/services/pagecounter.service';
 import { PageVisitorTrack } from 'src/app/modals/PageVisitorTrack';
 import { LoaderService } from 'src/app/services/loader-service.service';
-import { UserService } from 'src/app/services/user.service';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { Gallery } from '../addgallery/Gallery';
 import { FeedbackService } from 'src/app/services/feedback.service';
 import { Like } from 'src/app/modals/Like';
 import { ModalController } from '@ionic/angular';
 import { ModalCommentComponent } from './add-comment-modal/modal-comment.component';
-import { User } from 'src/app/modals/User';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { User } from 'src/app/modals/User';
 
 
 @Component({
@@ -23,7 +23,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class DisplayPage implements OnInit {
 
-  gallery: any;
+  gallery: Gallery;
   images: any;
   loaded = false;
   galleryId: any;
@@ -31,13 +31,26 @@ export class DisplayPage implements OnInit {
   likeCount = 0;
   commentCount = 0;
   currentUserId : any;
+  galleryAuthor :User;
   currentScrollPosition = 0;
   recoList: any[] = [];
   showImage= true;
 
 
+  slideOptsOne = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay:true,pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '">' + (index + 1) + '</span>';
+      },
+    }
+  };
+  
   constructor(private arouter: ActivatedRoute, 
-              private imageDBService: GalleryService,
+              private userService: UserService,
               private sharing: SeoService ,
               private socialSharing: SocialSharing, 
               private router: Router,
@@ -62,30 +75,42 @@ export class DisplayPage implements OnInit {
     }
 
     this.currentUserId = this.authService.getCurrentUserId();
-    this.loadRecomandations(this.currentUserId )
-   
+    
+
   }
 
   hideImage() {
-   setTimeout(()=> {this.showImage = false}, 10000);
+   setTimeout(()=> {this.showImage = false}, 5000);
   }
   
 
   async loadGallery() {
-    this.imageDBService.getGallery(this.galleryId).subscribe(res => {
+    this.galleryService.getGallery(this.galleryId).subscribe(res => {
       this.gallery = res;
       this.loader.loadingDismiss();
       this.shareLink(this.gallery);
       this.loaded = true;
+      
+      if(this.currentUserId==undefined) {
+         this.userService.getUserWithID(this.gallery.createdby).subscribe(res => {
+          this.galleryAuthor = res;
+          this.loadRecomandations();
+        }
+
+    )};
     });
   }
 
-  loadRecomandations(currentUserId: any) {
-    this.galleryService.getUserGalleryList().subscribe(res => {
-      this.recoList = res;
-    });
-
-   
+  loadRecomandations() {
+    if(this.currentUserId !== null) {
+      this.galleryService.getUserGalleryList().subscribe(res => {
+        this.recoList = res;
+      });
+    } else {
+      this.galleryService.getUserGalleryListById(this.gallery.createdby).subscribe(res => {
+        this.recoList = res;
+      });
+    }
   }
 
    shareLink(gallery: Gallery) {
@@ -160,11 +185,16 @@ export class DisplayPage implements OnInit {
 
 
   onScroll(event) {
+    console.log("Event e ",  event )
     this.currentScrollPosition = event.detail.currentY;
   }
 
   doClick(event) {
     this.router.navigate(['/gallery/', event]);
+  }
+
+  goUserPage(gallery: Gallery){
+    this.router.navigate(['/user/home']);
   }
 
 

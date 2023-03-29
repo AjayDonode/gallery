@@ -13,6 +13,7 @@ gallery-card {
 }
 
 .swiper-slide img {
+  width: inherit;
   max-width: 100%;
   height: auto;
   max-height: 80%;
@@ -50,7 +51,27 @@ ion-card-content p{
 }
 
 .button-bar {
-  padding: 5px;
-  height: 50px;
+  // padding: 5px;
+  // height: 50px;
   background-color: yellowgreen;
 }
+
+// .profile-card {
+//   text-align: left;
+//   padding: 10px;
+//   img{
+//     width: 50px;
+//     height: 50px;
+//     object-fit:cover ;
+//     border-radius: 50%;
+//   }
+// }
+
+// .toolbar-title {
+//   display: inherit;
+//   width: 100%;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   overflow: hidden;
+//   pointer-events: auto;
+// }

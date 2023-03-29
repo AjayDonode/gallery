@@ -37,8 +37,8 @@ export class GalleryService {
   }
 
 
-  getRecoGalleryList() {
-    const uid = this.authenticationService.getCurrentUserId();
+  getRecoGalleryList(uid:any) {
+   
     this.galleryCollection = this.database.collection<Gallery>('Gallery', ref => {
       // Compose a query using multiple .where() methods
       return ref.orderBy('createdon');
