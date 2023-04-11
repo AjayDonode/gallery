@@ -94,10 +94,10 @@ export class DisplayPage implements OnInit {
       if(this.currentUserId==undefined) {
          this.userService.getUserWithID(this.gallery.createdby).subscribe(res => {
           this.galleryAuthor = res;
-          this.loadRecomandations();
         }
 
     )};
+    this.loadRecomandations();
     });
   }
 

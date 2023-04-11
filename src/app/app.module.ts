@@ -21,7 +21,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
 import { EditProfilePageModule } from './profile/edit-profile/edit-profile.module';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { QuillModule } from 'ngx-quill'
 import { ModalCommentComponentModule } from './gallery/display/add-comment-modal/modal-comment.module';
 firebase.initializeApp(environment.firebase);
 
@@ -31,7 +30,6 @@ firebase.initializeApp(environment.firebase);
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    QuillModule.forRoot(),
     AppRoutingModule,
     CreateGalleryPageModule,
     ModalCommentComponentModule,
